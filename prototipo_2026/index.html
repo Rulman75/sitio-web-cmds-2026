@@ -1,0 +1,2441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inicio - CMDS Antofagasta | Corporación Municipal de Desarrollo Social</title>
+  <link rel="icon" type="image/png" href="assets/favicon-isotipo.png" />
+  <!-- Google Fonts: Plus Jakarta Sans & Inter (equivalentes web modernos a la línea tipográfica 2026) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Paleta Oficial Manual de Normas Gráficas CMDS 2026 */
+      --cmds-blue: #006098;
+      --cmds-blue-dark: #004670;
+      --cmds-blue-deeper: #002f4d;
+      --cmds-blue-light: #e6f2f8;
+      --cmds-teal: #44babe;
+      --cmds-teal-dark: #25969a;
+      --cmds-teal-light: #eaf8f9;
+      --cmds-amber: #f7a516;
+      --cmds-amber-dark: #d98b06;
+      --cmds-amber-light: #fef6e6;
+      --cmds-pink: #eb567e;
+      --cmds-pink-dark: #cf3861;
+      --cmds-pink-light: #fdeef2;
+
+      /* Neutros y superficies */
+      --bg-body: #f6f9fc;
+      --bg-surface: #ffffff;
+      --text-main: #0f2942;
+      --text-secondary: #4a607a;
+      --text-muted: #6e849e;
+      --border-color: #dce6f0;
+      --shadow-sm: 0 2px 8px rgba(0, 60, 100, 0.06);
+      --shadow-md: 0 10px 28px rgba(0, 60, 100, 0.09);
+      --shadow-lg: 0 18px 42px rgba(0, 60, 100, 0.14);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --font-scale: 1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: calc(16px * var(--font-scale));
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-body);
+      background-image: url('assets/pattern-cmds.png');
+      background-size: 900px auto;
+      background-attachment: fixed;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       FRANJA MULTICOLOR INSTITUCIONAL 2026 (Normas Gráficas pág. 1, 6, 7, 8, 10, 11)
+       ========================================================================== */
+    .brand-ribbon {
+      display: grid;
+      grid-template-columns: 68% 10.66% 10.67% 10.67%;
+      height: 8px;
+      width: 100%;
+    }
+    .brand-ribbon.thick {
+      height: 11px;
+    }
+    .brand-ribbon .seg-blue { background-color: var(--cmds-blue); }
+    .brand-ribbon .seg-teal { background-color: var(--cmds-teal); }
+    .brand-ribbon .seg-amber { background-color: var(--cmds-amber); }
+    .brand-ribbon .seg-pink { background-color: var(--cmds-pink); }
+
+    /* ==========================================================================
+       BARRA SUPERIOR INSTITUCIONAL (TOPBAR)
+       ========================================================================== */
+    .topbar {
+      background-color: var(--cmds-blue-deeper);
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.8125rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .slogan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-style: italic;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(235, 86, 126, 0.22);
+      border: 1px solid rgba(235, 86, 126, 0.45);
+      padding: 2px 11px;
+      border-radius: 99px;
+    }
+    .slogan-pill .dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+    .slogan-pill .dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+    }
+    .topbar-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      color: rgba(255, 255, 255, 0.82);
+    }
+    .topbar-contact span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .gov-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .gov-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      font-weight: 500;
+      font-size: 0.78rem;
+    }
+    .gov-link:hover {
+      background: var(--cmds-teal);
+      color: #00263e;
+    }
+    .gov-link.highlight-mail {
+      background: rgba(247, 165, 22, 0.2);
+      border: 1px solid rgba(247, 165, 22, 0.45);
+    }
+    .gov-link.highlight-mail:hover {
+      background: var(--cmds-amber);
+      color: #00263e;
+    }
+    .a11y-controls {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 6px;
+      padding: 2px;
+      gap: 2px;
+    }
+    .a11y-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 7px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .a11y-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* ==========================================================================
+       CABECERA PRINCIPAL Y NAVEGACIÓN (HEADER)
+       ========================================================================== */
+    .site-header {
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 60, 100, 0.08);
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    /* Variante Cabecera Azul Corporativo (#006098 - Manual pág. 3) */
+    body.header-dark .site-header {
+      background: var(--cmds-blue);
+      color: #ffffff;
+      box-shadow: 0 6px 24px rgba(0, 35, 65, 0.25);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 92px;
+      gap: 16px;
+    }
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+    }
+    .brand-logo img {
+      height: 68px;
+      width: auto;
+      object-fit: contain;
+    }
+    .brand-logo .logo-dark-bg {
+      display: none;
+    }
+    body.header-dark .brand-logo .logo-light-bg {
+      display: none;
+    }
+    body.header-dark .brand-logo .logo-dark-bg {
+      display: block;
+    }
+    .brand-divider {
+      width: 1px;
+      height: 44px;
+      background: var(--border-color);
+    }
+    body.header-dark .brand-divider {
+      background: rgba(255, 255, 255, 0.22);
+    }
+    .muni-badge {
+      display: flex;
+      align-items: center;
+    }
+    .muni-badge img {
+      height: 46px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    body.header-dark .muni-badge img {
+      background: #ffffff;
+      padding: 4px 8px;
+    }
+
+    /* Navegación Principal con Submenús */
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px 13px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    body.header-dark .nav-link {
+      color: #ffffff;
+    }
+    .nav-link:hover,
+    .nav-item:hover > .nav-link,
+    .nav-link.active {
+      color: var(--cmds-blue);
+      background: var(--cmds-blue-light);
+    }
+    body.header-dark .nav-link:hover,
+    body.header-dark .nav-item:hover > .nav-link,
+    body.header-dark .nav-link.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .nav-link svg {
+      width: 14px;
+      height: 14px;
+      opacity: 0.7;
+      transition: transform 0.2s ease;
+    }
+    .nav-item:hover > .nav-link svg {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown Menus */
+    .dropdown-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      min-width: 260px;
+      background: #ffffff;
+      color: var(--text-main);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.2s ease;
+      z-index: 1100;
+    }
+    .dropdown-menu.mega-salud {
+      min-width: 540px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+    }
+    .dropdown-menu.mega-educacion {
+      min-width: 480px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding: 16px;
+    }
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-group-title {
+      font-size: 0.73rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--cmds-blue);
+      padding: 6px 10px 4px;
+      border-bottom: 2px solid var(--cmds-blue-light);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dropdown-group-title.teal {
+      color: var(--cmds-teal-dark);
+      border-bottom-color: var(--cmds-teal-light);
+    }
+    .dropdown-group-title.amber {
+      color: var(--cmds-amber-dark);
+      border-bottom-color: var(--cmds-amber-light);
+    }
+    .dropdown-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      font-size: 0.86rem;
+      font-weight: 500;
+      color: var(--text-main);
+      border-radius: 7px;
+    }
+    .dropdown-link:hover {
+      background: var(--cmds-blue-light);
+      color: var(--cmds-blue);
+      padding-left: 14px;
+    }
+
+    /* Botones de Acción en Cabecera */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .btn-hora-salud {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--cmds-pink) 0%, var(--cmds-pink-dark) 100%);
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 11px 18px;
+      border-radius: 99px;
+      box-shadow: 0 6px 16px rgba(235, 86, 126, 0.32);
+    }
+    .btn-hora-salud:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(235, 86, 126, 0.45);
+    }
+    .mobile-menu-btn {
+      display: none;
+      background: var(--cmds-blue-light);
+      color: var(--cmds-blue);
+      border: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ==========================================================================
+       HERO PRINCIPAL (SLIDER + ACCESOS CRÍTICOS DESTACADOS)
+       ========================================================================== */
+    .hero-section {
+      position: relative;
+      background: linear-gradient(125deg, #003b60 0%, var(--cmds-blue) 62%, #0d7ca8 100%);
+      color: #ffffff;
+      padding: 40px 0 48px;
+      overflow: hidden;
+    }
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url('assets/pattern-cmds.png');
+      background-size: 720px auto;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .hero-bg-circles {
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(68, 186, 190, 0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.55fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    /* Slider Principal de Noticias Destacadas */
+    .hero-slider-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 430px;
+      background: #00263e;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .hero-slide.active {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+      min-height: 430px;
+    }
+    .hero-slide-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 6s ease;
+    }
+    .hero-slide.active .hero-slide-img {
+      transform: scale(1.03);
+    }
+    .hero-slide-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0, 35, 60, 0.15) 0%, rgba(0, 32, 56, 0.72) 52%, rgba(0, 24, 44, 0.96) 100%);
+    }
+    .hero-slide-content {
+      position: relative;
+      z-index: 2;
+      padding: 32px;
+    }
+    .slide-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .badge-area {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-area.salud {
+      background: var(--cmds-teal);
+      color: #002838;
+    }
+    .badge-area.educacion {
+      background: var(--cmds-amber);
+      color: #2c1a00;
+    }
+    .badge-area.comunidad {
+      background: var(--cmds-pink);
+      color: #ffffff;
+    }
+    .slide-date {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+    }
+    .hero-slide-title {
+      font-size: 1.65rem;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 14px;
+      max-width: 680px;
+    }
+    .hero-slide-desc {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.86);
+      margin-bottom: 20px;
+      max-width: 640px;
+    }
+    .hero-slide-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .btn-slide-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      color: var(--cmds-blue);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 11px 20px;
+      border-radius: 10px;
+    }
+    .btn-slide-read:hover {
+      background: var(--cmds-teal);
+      color: #00263e;
+    }
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 99px;
+      border: none;
+      background: rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .slider-dot.active {
+      width: 28px;
+      background: var(--cmds-amber);
+    }
+    .slider-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 35, 60, 0.5);
+      color: #ffffff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slider-arrow:hover {
+      background: #ffffff;
+      color: var(--cmds-blue);
+    }
+
+    /* Columna Derecha Hero: Campañas y Trámites Prioritarios 2026 */
+    .hero-priority-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: space-between;
+    }
+    .priority-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 4px;
+    }
+    .priority-header h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .priority-card {
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--text-main);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: var(--shadow-md);
+      border-left: 6px solid var(--cmds-blue);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .priority-card:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .priority-card.card-teal { border-left-color: var(--cmds-teal); }
+    .priority-card.card-amber { border-left-color: var(--cmds-amber); }
+    .priority-card.card-pink { border-left-color: var(--cmds-pink); }
+
+    .priority-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.35rem;
+    }
+    .card-teal .priority-icon { background: var(--cmds-teal-light); color: var(--cmds-teal-dark); }
+    .card-amber .priority-icon { background: var(--cmds-amber-light); color: var(--cmds-amber-dark); }
+    .card-pink .priority-icon { background: var(--cmds-pink-light); color: var(--cmds-pink-dark); }
+    .card-blue .priority-icon { background: var(--cmds-blue-light); color: var(--cmds-blue); }
+
+    .priority-info {
+      flex: 1;
+    }
+    .priority-tag {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .card-teal .priority-tag { color: var(--cmds-teal-dark); }
+    .card-amber .priority-tag { color: var(--cmds-amber-dark); }
+    .card-pink .priority-tag { color: var(--cmds-pink-dark); }
+    .card-blue .priority-tag { color: var(--cmds-blue); }
+
+    .priority-title {
+      font-size: 0.96rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+    }
+    .priority-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .priority-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--bg-body);
+      color: var(--cmds-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .priority-card:hover .priority-arrow {
+      background: var(--cmds-blue);
+      color: #ffffff;
+    }
+
+    /* ==========================================================================
+       HUB CENTRAL DE SERVICIOS Y PORTALES DIGITALES (REEMPLAZO DE BOTONES PNG)
+       ========================================================================== */
+    .services-section {
+      padding: 56px 0 48px;
+      position: relative;
+    }
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--cmds-blue);
+      margin-bottom: 6px;
+    }
+    .section-eyebrow::before {
+      content: "";
+      width: 24px;
+      height: 4px;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--cmds-teal), var(--cmds-amber), var(--cmds-pink));
+    }
+    .section-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .section-subtitle {
+      font-size: 0.96rem;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      max-width: 650px;
+    }
+
+    /* Pestañas de filtrado de portales */
+    .service-tabs {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      background: #ffffff;
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .service-tab {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 0.86rem;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.2s ease;
+    }
+    .service-tab:hover {
+      color: var(--cmds-blue);
+      background: var(--cmds-blue-light);
+    }
+    .service-tab.active {
+      background: var(--cmds-blue);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 96, 152, 0.25);
+    }
+    .tab-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    /* Grilla de Tarjetas de Servicios (100% HTML/CSS para Elementor) */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .service-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.22s ease;
+    }
+    .service-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--cmds-blue);
+      transition: height 0.2s ease;
+    }
+    .service-card[data-cat="comunidad"]::after { background: var(--cmds-teal); }
+    .service-card[data-cat="educacion"]::after { background: var(--cmds-amber); }
+    .service-card[data-cat="funcionarios"]::after { background: var(--cmds-blue); }
+    .service-card[data-cat="transparencia"]::after { background: var(--cmds-pink); }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--cmds-blue);
+    }
+    .service-card.hidden {
+      display: none;
+    }
+    .service-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .service-icon-box {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      background: var(--cmds-blue-light);
+      color: var(--cmds-blue);
+      flex-shrink: 0;
+    }
+    .service-card[data-cat="comunidad"] .service-icon-box {
+      background: var(--cmds-teal-light);
+      color: var(--cmds-teal-dark);
+    }
+    .service-card[data-cat="educacion"] .service-icon-box {
+      background: var(--cmds-amber-light);
+      color: var(--cmds-amber-dark);
+    }
+    .service-card[data-cat="transparencia"] .service-icon-box {
+      background: var(--cmds-pink-light);
+      color: var(--cmds-pink-dark);
+    }
+    .service-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--bg-body);
+      color: var(--text-secondary);
+    }
+    .service-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    .service-card p {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+    .service-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--cmds-blue);
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-color);
+    }
+    .service-card:hover .service-card-footer {
+      color: var(--cmds-pink-dark);
+    }
+
+    /* ==========================================================================
+       SECCIÓN ÁREAS DE GESTIÓN: SALUD APS & EDUCACIÓN MUNICIPAL
+       ========================================================================== */
+    .pillars-section {
+      padding: 36px 0 56px;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    .pillar-panel {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .pillar-banner {
+      padding: 28px 30px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar-banner.salud-banner {
+      background: linear-gradient(135deg, var(--cmds-blue) 0%, var(--cmds-teal-dark) 100%);
+    }
+    .pillar-banner.educacion-banner {
+      background: linear-gradient(135deg, var(--cmds-blue-deeper) 0%, var(--cmds-blue) 60%, var(--cmds-amber-dark) 100%);
+    }
+    .pillar-kicker {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 4px 10px;
+      border-radius: 99px;
+      background: rgba(255, 255, 255, 0.18);
+      margin-bottom: 10px;
+    }
+    .pillar-banner h3 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .pillar-banner p {
+      font-size: 0.9rem;
+      opacity: 0.92;
+      max-width: 480px;
+    }
+    .pillar-stats {
+      display: flex;
+      gap: 20px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .pillar-stat strong {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+    }
+    .pillar-stat span {
+      font-size: 0.76rem;
+      opacity: 0.88;
+    }
+    .pillar-body {
+      padding: 24px 30px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .network-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .network-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 12px;
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .network-chip:hover {
+      background: var(--cmds-blue);
+      color: #ffffff;
+      border-color: var(--cmds-blue);
+    }
+    .pillar-footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+    }
+    .btn-pillar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.86rem;
+      background: var(--cmds-blue);
+      color: #ffffff;
+    }
+    .btn-pillar:hover {
+      background: var(--cmds-blue-dark);
+    }
+    .btn-pillar.outline {
+      background: transparent;
+      color: var(--cmds-blue);
+      border: 1px solid var(--cmds-blue);
+    }
+    .btn-pillar.outline:hover {
+      background: var(--cmds-blue-light);
+    }
+
+    /* ==========================================================================
+       SECCIÓN DE NOTICIAS RECIENTES (OPTIMIZADA: 6 NOTICIAS RECIENTES EN VEZ DE 6 AÑOS)
+       ========================================================================== */
+    .news-section {
+      padding: 48px 0 64px;
+      background: rgba(255, 255, 255, 0.78);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .news-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .news-thumb-wrap {
+      position: relative;
+      height: 210px;
+      overflow: hidden;
+      background: #dce6f0;
+    }
+    .news-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .news-card:hover .news-thumb-wrap img {
+      transform: scale(1.06);
+    }
+    .news-cat-pill {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 4px 11px;
+      border-radius: 99px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #ffffff;
+      background: var(--cmds-blue);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .news-cat-pill.salud { background: var(--cmds-teal-dark); }
+    .news-cat-pill.educacion { background: var(--cmds-amber-dark); }
+    .news-cat-pill.comunidad { background: var(--cmds-pink-dark); }
+
+    .news-body {
+      padding: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .news-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .news-title {
+      font-size: 1.06rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.35;
+      margin-top: 6px;
+    }
+    .news-card:hover .news-title {
+      color: var(--cmds-blue);
+    }
+    .news-readmore {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--cmds-blue);
+    }
+
+    /* ==========================================================================
+       BANNER CAMPAÑA INSTITUCIONAL (Manual Normas Gráficas pág. 9)
+       ========================================================================== */
+    .campaign-strip {
+      padding: 36px 0;
+    }
+    .campaign-box {
+      background: linear-gradient(90deg, var(--cmds-blue) 0%, #004e7c 100%);
+      border-radius: var(--radius-lg);
+      padding: 28px 36px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .campaign-box::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--cmds-teal) 0%, var(--cmds-amber) 50%, var(--cmds-pink) 100%);
+    }
+    .campaign-text h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .campaign-text p {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.88);
+      font-style: italic;
+    }
+    .campaign-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-campaign {
+      background: #ffffff;
+      color: var(--cmds-blue);
+      font-weight: 800;
+      font-size: 0.88rem;
+      padding: 12px 20px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-campaign:hover {
+      background: var(--cmds-amber);
+      color: #1f1300;
+    }
+
+    /* ==========================================================================
+       PIE DE PÁGINA OFICIAL (FOOTER 2026 - Manual Normas Gráficas)
+       ========================================================================== */
+    .site-footer {
+      background-color: var(--cmds-blue-deeper);
+      color: rgba(255, 255, 255, 0.86);
+      padding-top: 56px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.1fr;
+      gap: 36px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .footer-brand-logos {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+    .footer-logo-cmds {
+      height: 74px;
+      width: auto;
+      object-fit: contain;
+    }
+    .footer-logo-muni {
+      height: 46px;
+      width: auto;
+      background: #ffffff;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+    .footer-slogan {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--cmds-pink);
+      margin-bottom: 12px;
+    }
+    .footer-desc {
+      font-size: 0.86rem;
+      color: rgba(255, 255, 255, 0.76);
+      margin-bottom: 18px;
+    }
+    .footer-col h4 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(68, 186, 190, 0.4);
+      display: inline-block;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 0.85rem;
+    }
+    .footer-links a:hover {
+      color: var(--cmds-teal);
+      padding-left: 4px;
+    }
+    .footer-contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.85rem;
+    }
+    .footer-contact-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .footer-contact-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--cmds-teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .footer-bottom {
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* ==========================================================================
+       BARRA FLOTANTE INTERACTIVA DEL PROTOTIPO (PARA VALIDACIÓN DEL CLIENTE)
+       ========================================================================== */
+    .prototype-toolbar {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 2000;
+      background: #0f2942;
+      color: #ffffff;
+      border-radius: 14px;
+      padding: 12px 16px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+      border: 1px solid rgba(68, 186, 190, 0.45);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+    }
+    .proto-badge {
+      background: var(--cmds-teal);
+      color: #00263e;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+    }
+    .proto-btn {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 11px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .proto-btn:hover, .proto-btn.active {
+      background: var(--cmds-amber);
+      color: #1f1300;
+      border-color: var(--cmds-amber);
+    }
+
+    /* Responsive */
+    @media (max-width: 1120px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 860px) {
+      .main-nav {
+        display: none;
+      }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+      .services-grid,
+      .news-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-slide-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- FRANJA MULTICOLOR OFICIAL 2026 (#006098 | #44babe | #f7a516 | #eb567e) -->
+  <div class="brand-ribbon thick" role="presentation">
+    <div class="seg-blue"></div>
+    <div class="seg-teal"></div>
+    <div class="seg-amber"></div>
+    <div class="seg-pink"></div>
+  </div>
+
+  <!-- BARRA SUPERIOR INSTITUCIONAL (TOPBAR) -->
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-left">
+        <span class="slogan-pill">
+          <span class="dots">
+            <span style="background:#44babe"></span>
+            <span style="background:#f7a516"></span>
+            <span style="background:#eb567e"></span>
+          </span>
+          “Educación que transforma, salud que protege”
+        </span>
+        <div class="topbar-contact">
+          <span>📍 Avda. Argentina 1595, 2° Piso, Antofagasta</span>
+          <span>📞 +56 55 255 3700 / 55 2 553707</span>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="gov-links">
+          <a href="https://www.portaltransparencia.cl/PortalPdT/pdtta?codOrganismo=CM002" target="_blank" rel="noopener" class="gov-link">
+            🔍 Transparencia Activa
+          </a>
+          <a href="https://www.leylobby.gob.cl/instituciones/CM002" target="_blank" rel="noopener" class="gov-link">
+            🏛️ Ley del Lobby
+          </a>
+          <a href="https://www.mercadopublico.cl/Home" target="_blank" rel="noopener" class="gov-link">
+            🛒 Mercado Público
+          </a>
+          <a href="https://outlook.office.com/" target="_blank" rel="noopener" class="gov-link highlight-mail">
+            ✉️ Mail Corporativo
+          </a>
+          <a href="https://totem.cmds.cl/totem-admin/public/login" target="_blank" rel="noopener" class="gov-link">
+            👤 Portal Trabajador
+          </a>
+        </div>
+        <div class="a11y-controls" aria-label="Tamaño de texto">
+          <button class="a11y-btn" onclick="setFontScale(0.92)" title="Disminuir letra">A-</button>
+          <button class="a11y-btn" onclick="setFontScale(1)" title="Letra normal">A</button>
+          <button class="a11y-btn" onclick="setFontScale(1.1)" title="Aumentar letra">A+</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CABECERA PRINCIPAL (CON TODOS LOS MENÚS Y SUBMENÚS REALES DE WWW.CMDS.CL) -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="https://www.cmds.cl/" class="brand-logo" title="CMDS Antofagasta - Inicio">
+          <img src="assets/logo-cmds-color.png" alt="Logo CMDS Antofagasta 2026" class="logo-light-bg" />
+          <img src="assets/logo-cmds-oscuro.png" alt="Logo CMDS Antofagasta 2026 Fondo Oscuro" class="logo-dark-bg" />
+        </a>
+        <div class="brand-divider"></div>
+        <a href="https://www.municipalidadantofagasta.cl" target="_blank" rel="noopener" class="muni-badge" title="Ilustre Municipalidad de Antofagasta">
+          <img src="assets/logo-muni-antofagasta.png" alt="Ilustre Municipalidad de Antofagasta" />
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Menú Principal CMDS">
+        <div class="nav-item">
+          <a href="https://www.cmds.cl/" class="nav-link active">Inicio</a>
+        </div>
+
+        <!-- Menú Corporación -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Corporación
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </span>
+          <div class="dropdown-menu">
+            <div class="dropdown-group-title">Institucional CMDS</div>
+            <a href="https://www.cmds.cl/somos/" class="dropdown-link">Somos (Misión y Visión)</a>
+            <a href="https://www.cmds.cl/directorio/" class="dropdown-link">Directorio</a>
+            <a href="https://www.cmds.cl/presidencia-2/" class="dropdown-link">Presidencia</a>
+            <a href="https://www.cmds.cl/secretaria-ejecutiva/" class="dropdown-link">Secretaría Ejecutiva</a>
+            <a href="https://www.cmds.cl/direccion-de-obras-2/" class="dropdown-link">Dirección de Adm. y Finanzas</a>
+            <a href="https://www.cmds.cl/direccion-de-salud/" class="dropdown-link">Dirección de Salud</a>
+            <a href="https://www.cmds.cl/direccion-de-educacion/" class="dropdown-link">Dirección de Educación</a>
+            <a href="https://www.cmds.cl/direccion-de-obras/" class="dropdown-link">Dirección de Obras y Planificación</a>
+            <a href="https://www.cmds.cl/direccion-rrhh/" class="dropdown-link">Dirección RRHH</a>
+            <a href="https://www.cmds.cl/memoria/" class="dropdown-link">Memoria Anual</a>
+            <a href="https://www.cmds.cl/reglamento-interno/" class="dropdown-link">Reglamento Interno</a>
+          </div>
+        </div>
+
+        <!-- Menú Educación -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Educación
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </span>
+          <div class="dropdown-menu mega-educacion">
+            <div>
+              <div class="dropdown-group-title amber">Niveles Educativos</div>
+              <a href="https://www.cmds.cl/educacion-parvularia/" class="dropdown-link">Educación Parvularia</a>
+              <a href="https://www.cmds.cl/educacion-basica/" class="dropdown-link">Educación Básica</a>
+              <a href="https://www.cmds.cl/educacion-media/" class="dropdown-link">Educación Media</a>
+              <a href="https://www.cmds.cl/plan-comunal-2/" class="dropdown-link">PADEM (Plan Anual)</a>
+              <a href="https://www.cmds.cl/postulacion-educacion-parvularia-cmds-2027/" class="dropdown-link">Postulación Parvularia 2027</a>
+            </div>
+            <div>
+              <div class="dropdown-group-title">Apoyo Formación Integral</div>
+              <a href="https://www.cmds.cl/programa-de-integracion-escolar/" class="dropdown-link">Programa Integración Escolar (PIE)</a>
+              <a href="https://www.cmds.cl/departamento-psicosocial/" class="dropdown-link">Departamento Psicosocial</a>
+              <a href="https://www.cmds.cl/departamento-extraescolar/" class="dropdown-link">Departamento Extraescolar</a>
+              <a href="https://cmds-portaleduca.pad.cl:2443/login_ctrl/" class="dropdown-link">Portal Alumnos y Apoderados</a>
+              <a href="https://www.cmds.cl/cmds-educa-lcd/" class="dropdown-link">CMDS Educa / Videos</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Menú Salud -->
+        <div class="nav-item">
+          <span class="nav-link">
+            Salud (APS)
+            <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+          </span>
+          <div class="dropdown-menu mega-salud">
+            <div>
+              <div class="dropdown-group-title teal">Red de Centros CESFAM</div>
+              <a href="https://www.cmds.cl/cesfam-centro-sur/" class="dropdown-link">CESFAM Centro Sur</a>
+              <a href="https://www.cmds.cl/cesfam-maria-cristina-rojas/" class="dropdown-link">CESFAM María Cristina Rojas</a>
+              <a href="https://www.cmds.cl/cesfam-corvallis/" class="dropdown-link">CESFAM Corvallis</a>
+              <a href="https://www.cmds.cl/cesfam-central-oriente/" class="dropdown-link">CESFAM Central Oriente</a>
+              <a href="https://www.cmds.cl/cesfam-norte/" class="dropdown-link">CESFAM Norte</a>
+              <a href="https://www.cmds.cl/cesfam-rendic/" class="dropdown-link">CESFAM Dr. Antonio Rendic</a>
+              <a href="https://www.cmds.cl/cesfam-juan-pablo-ii/" class="dropdown-link">CESFAM Juan Pablo II</a>
+              <a href="https://www.cmds.cl/cesfam-valdivieso/" class="dropdown-link">CESFAM Valdivieso</a>
+            </div>
+            <div>
+              <div class="dropdown-group-title">CECOSF, Urgencia y Apoyo</div>
+              <a href="https://www.cmds.cl/cecosf-la-chimba/" class="dropdown-link">CECOSF La Chimba</a>
+              <a href="https://www.cmds.cl/cecosf-coviefi/" class="dropdown-link">CECOSF Coviefi</a>
+              <a href="https://www.cmds.cl/sar-coviefi/" class="dropdown-link">SAR Coviefi (Urgencia)</a>
+              <a href="https://www.cmds.cl/central-de-servicios/" class="dropdown-link">Laboratorio Clínico Sarita Núñez</a>
+              <a href="https://www.cmds.cl/plan-comunal/" class="dropdown-link">Plan Comunal de Salud</a>
+              <a href="https://horasalud.cl/web/portal/" target="_blank" class="dropdown-link" style="font-weight:700;color:var(--cmds-pink-dark);">🩺 Reserva de Hora Salud</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-item">
+          <a href="https://www.cmds.cl/noticias-2/" class="nav-link">Noticias</a>
+        </div>
+
+        <div class="nav-item">
+          <a href="https://www.cmds.cl/trabaja-con-nosotros/" class="nav-link">Trabaja con Nosotros</a>
+        </div>
+
+        <div class="nav-item">
+          <a href="https://www.cmds.cl/contacto/" class="nav-link">Contacto</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <a href="https://horasalud.cl/web/portal/" target="_blank" rel="noopener" class="btn-hora-salud">
+          🩺 Hora Salud en Línea
+        </a>
+        <button class="mobile-menu-btn" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECCIÓN HERO: CARRUSEL DE HITOS + ACCESOS PRIORITARIOS -->
+  <section class="hero-section">
+    <div class="hero-bg-circles"></div>
+    <div class="container hero-grid">
+
+      <!-- Carrusel Principal con Noticias Reales de Octubre 2026 -->
+      <div class="hero-slider-card" id="heroSlider">
+        <!-- Slide 1 -->
+        <article class="hero-slide active">
+          <img src="https://www.cmds.cl/wp-content/uploads/2026/10/acredutacion-web-scaled.jpg" alt="Acreditación CESFAM Valdivieso" class="hero-slide-img" />
+          <div class="hero-slide-overlay"></div>
+          <div class="hero-slide-content">
+            <div class="slide-badges">
+              <span class="badge-area salud">Salud Primaria APS</span>
+              <span class="slide-date">📅 23 de octubre, 2026</span>
+            </div>
+            <h1 class="hero-slide-title">Superintendencia de Salud acredita en calidad a un nuevo CESFAM de la CMDS: ahora es el turno del Valdivieso</h1>
+            <p class="hero-slide-desc">Hito histórico en la Atención Primaria comunal reafirma los estándares de seguridad y calidad en las prestaciones entregadas a las familias de Antofagasta.</p>
+            <div class="hero-slide-actions">
+              <a href="https://www.cmds.cl/10565-2/" class="btn-slide-read">Leer noticia completa →</a>
+              <div class="slider-controls">
+                <button class="slider-arrow" onclick="changeSlide(-1)" aria-label="Anterior">‹</button>
+                <button class="slider-dot active" onclick="goToSlide(0)" aria-label="Noticia 1"></button>
+                <button class="slider-dot" onclick="goToSlide(1)" aria-label="Noticia 2"></button>
+                <button class="slider-dot" onclick="goToSlide(2)" aria-label="Noticia 3"></button>
+                <button class="slider-arrow" onclick="changeSlide(1)" aria-label="Siguiente">›</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 2 -->
+        <article class="hero-slide">
+          <img src="https://www.cmds.cl/wp-content/uploads/2026/10/bandas-guerra-web-scaled.jpg" alt="Campeonato de Bandas Escolares" class="hero-slide-img" />
+          <div class="hero-slide-overlay"></div>
+          <div class="hero-slide-content">
+            <div class="slide-badges">
+              <span class="badge-area educacion">Educación Municipal</span>
+              <span class="slide-date">📅 21 de octubre, 2026</span>
+            </div>
+            <h2 class="hero-slide-title">Campeonato de bandas escolares reunirá a los mejores exponentes nacionales de la disciplina</h2>
+            <p class="hero-slide-desc">Establecimientos de la Corporación Municipal de Desarrollo Social impulsan la formación integral, artística y ciudadana de nuestros estudiantes.</p>
+            <div class="hero-slide-actions">
+              <a href="https://www.cmds.cl/campeonato-de-bandas-escolares-reune-a-los-mejores-exponentes-nacionales-de-la-disciplina/" class="btn-slide-read">Leer noticia completa →</a>
+              <div class="slider-controls">
+                <button class="slider-arrow" onclick="changeSlide(-1)" aria-label="Anterior">‹</button>
+                <button class="slider-dot" onclick="goToSlide(0)" aria-label="Noticia 1"></button>
+                <button class="slider-dot active" onclick="goToSlide(1)" aria-label="Noticia 2"></button>
+                <button class="slider-dot" onclick="goToSlide(2)" aria-label="Noticia 3"></button>
+                <button class="slider-arrow" onclick="changeSlide(1)" aria-label="Siguiente">›</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Slide 3 -->
+        <article class="hero-slide">
+          <img src="https://www.cmds.cl/wp-content/uploads/2026/10/dia-del-profesor-web-1-scaled.jpg" alt="Día del Profesor CMDS" class="hero-slide-img" />
+          <div class="hero-slide-overlay"></div>
+          <div class="hero-slide-content">
+            <div class="slide-badges">
+              <span class="badge-area comunidad">Reconocimiento Docente</span>
+              <span class="slide-date">📅 16 de octubre, 2026</span>
+            </div>
+            <h2 class="hero-slide-title">Una vida dedicada a la enseñanza: docentes reciben homenaje en el Día del Profesor</h2>
+            <p class="hero-slide-desc">CMDS Antofagasta destacó la vocación y trayectoria de profesoras y profesores que transforman vidas en jardines, escuelas y liceos de la comuna.</p>
+            <div class="hero-slide-actions">
+              <a href="https://www.cmds.cl/10529-2/" class="btn-slide-read">Leer noticia completa →</a>
+              <div class="slider-controls">
+                <button class="slider-arrow" onclick="changeSlide(-1)" aria-label="Anterior">‹</button>
+                <button class="slider-dot" onclick="goToSlide(0)" aria-label="Noticia 1"></button>
+                <button class="slider-dot" onclick="goToSlide(1)" aria-label="Noticia 2"></button>
+                <button class="slider-dot active" onclick="goToSlide(2)" aria-label="Noticia 3"></button>
+                <button class="slider-arrow" onclick="changeSlide(1)" aria-label="Siguiente">›</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Accesos Directos Prioritarios (Reemplazo moderno de los banners laterales) -->
+      <div class="hero-priority-col">
+        <div class="priority-header">
+          <h2>⚡ Accesos Destacados Comunidad</h2>
+        </div>
+
+        <a href="https://www.cmds.cl/postulacion-educacion-parvularia-cmds-2027/" class="priority-card card-amber">
+          <div class="priority-icon">🎒</div>
+          <div class="priority-info">
+            <span class="priority-tag">Proceso Admisión 2027</span>
+            <div class="priority-title">Postulación Educación Parvularia CMDS</div>
+            <div class="priority-sub">Inscripción abierta para las 4 escuelas de párvulos</div>
+          </div>
+          <div class="priority-arrow">→</div>
+        </a>
+
+        <a href="https://horasalud.cl/web/portal/" target="_blank" rel="noopener" class="priority-card card-teal">
+          <div class="priority-icon">🩺</div>
+          <div class="priority-info">
+            <span class="priority-tag">Atención Primaria APS</span>
+            <div class="priority-title">Reserva tu Hora de Salud en Línea</div>
+            <div class="priority-sub">Portal HoraSalud para CESFAM de Antofagasta</div>
+          </div>
+          <div class="priority-arrow">→</div>
+        </a>
+
+        <a href="https://cmds-portaleduca.pad.cl:2443/login_ctrl/" target="_blank" rel="noopener" class="priority-card card-blue">
+          <div class="priority-icon">🎓</div>
+          <div class="priority-info">
+            <span class="priority-tag">Comunidad Escolar</span>
+            <div class="priority-title">Portal de Alumnos y Apoderados</div>
+            <div class="priority-sub">Certificados, notas y seguimiento académico en línea</div>
+          </div>
+          <div class="priority-arrow">→</div>
+        </a>
+
+        <a href="https://www.cmds.cl/wp-content/uploads/2025/03/PROTOCOLO_DE_LA_PREVENCION_INVESTIGACION_YSANCION_DEL_ACOSO_LABORAL_SEXUAL_Y_VIOLENCIA_EN_EL_TRABAJO.pdf" target="_blank" rel="noopener" class="priority-card card-pink">
+          <div class="priority-icon">🛡️</div>
+          <div class="priority-info">
+            <span class="priority-tag">Espacios Seguros · Normativa</span>
+            <div class="priority-title">Protocolo Prevención Acoso Laboral y Violencia</div>
+            <div class="priority-sub">Descarga directa del protocolo institucional vigente (PDF)</div>
+          </div>
+          <div class="priority-arrow">↓</div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HUB INTERACTIVO DE PORTALES Y SERVICIOS (CONSERVA EL 100% DE LOS ENLACES DEL SITIO ACTUAL) -->
+  <section class="services-section" id="portales">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Plataformas y Trámites en Línea</span>
+          <h2 class="section-title">Centro de Servicios Digitales CMDS</h2>
+          <p class="section-subtitle">Todos los portales de educación, salud, funcionarios y transparencia unificados bajo la nueva identidad institucional 2026.</p>
+        </div>
+
+        <div class="service-tabs" role="tablist">
+          <button class="service-tab active" onclick="filterServices('all', this)">
+            Todos (20)
+          </button>
+          <button class="service-tab" onclick="filterServices('comunidad', this)">
+            <span class="tab-dot" style="background:var(--cmds-teal)"></span> Comunidad y Salud
+          </button>
+          <button class="service-tab" onclick="filterServices('educacion', this)">
+            <span class="tab-dot" style="background:var(--cmds-amber)"></span> Educación
+          </button>
+          <button class="service-tab" onclick="filterServices('funcionarios', this)">
+            <span class="tab-dot" style="background:var(--cmds-blue)"></span> Funcionarios y Soporte
+          </button>
+          <button class="service-tab" onclick="filterServices('transparencia', this)">
+            <span class="tab-dot" style="background:var(--cmds-pink)"></span> Transparencia y Empleo
+          </button>
+        </div>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+        <!-- 1. Portal Alumnos y Apoderados -->
+        <a href="https://cmds-portaleduca.pad.cl:2443/login_ctrl/" target="_blank" rel="noopener" class="service-card" data-cat="educacion">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">👨‍👩‍👧‍👦</div>
+              <span class="service-badge">Educación</span>
+            </div>
+            <h3>Portal Alumnos y Apoderados</h3>
+            <p>Acceso a información escolar, asistencia y documentos para familias de establecimientos CMDS.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ingresar al portal</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 2. Verificación de Certificados Educación -->
+        <a href="https://cmds-portaleduca.pad.cl:2443/verificar_certificado/" target="_blank" rel="noopener" class="service-card" data-cat="educacion">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">📄</div>
+              <span class="service-badge">Educación</span>
+            </div>
+            <h3>Verificación de Certificados</h3>
+            <p>Valida en línea la autenticidad de certificados emitidos por el área de Educación CMDS.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Verificar folio</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 3. CMDS Educa -->
+        <a href="https://cmds.pad.cl:2443/login/" target="_blank" rel="noopener" class="service-card" data-cat="educacion">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">💻</div>
+              <span class="service-badge">Educación</span>
+            </div>
+            <h3>Plataforma CMDS Educa</h3>
+            <p>Sistema de gestión educativa y recursos pedagógicos para docentes y unidades educativas.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Acceder a plataforma</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 4. Videos CMDS Educa / LCD -->
+        <a href="https://www.cmds.cl/cmds-educa-lcd/" class="service-card" data-cat="educacion">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🎬</div>
+              <span class="service-badge">Educación</span>
+            </div>
+            <h3>CMDS Educa LCD / Videos</h3>
+            <p>Cápsulas audiovisuales, material pedagógico e iniciativas educativas comunales.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ver contenidos</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 5. Reserva Hora Salud -->
+        <a href="https://horasalud.cl/web/portal/" target="_blank" rel="noopener" class="service-card" data-cat="comunidad">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🩺</div>
+              <span class="service-badge">Salud APS</span>
+            </div>
+            <h3>Reserva de Hora Salud</h3>
+            <p>Agenda horas médicas y controles en los Centros de Salud Familiar (CESFAM) de la red.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ir a HoraSalud.cl</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 6. Intranet Salud -->
+        <a href="http://salud.cmds.cl/" target="_blank" rel="noopener" class="service-card" data-cat="comunidad">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🏥</div>
+              <span class="service-badge">Salud APS</span>
+            </div>
+            <h3>Intranet Salud CMDS</h3>
+            <p>Plataforma interna de gestión clínica y administrativa de la Dirección de Salud.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Acceso funcionarios APS</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 7. Newsletter CMDS -->
+        <a href="https://www.cmds.cl/newsletter-cmds/" class="service-card" data-cat="comunidad">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">📰</div>
+              <span class="service-badge">Comunidad</span>
+            </div>
+            <h3>Newsletter Institucional</h3>
+            <p>Boletín informativo periódico con las principales novedades de educación y salud primaria.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Revisar boletines</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 8. Directorio Telefónico -->
+        <a href="https://www.cmds.cl/directorio-telefonico/" class="service-card" data-cat="comunidad">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">☎️</div>
+              <span class="service-badge">Contacto</span>
+            </div>
+            <h3>Directorio Telefónico</h3>
+            <p>Anexos y teléfonos de contacto de direcciones centrales, CESFAM, escuelas y liceos.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Consultar directorio</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 9. Portal del Trabajador -->
+        <a href="https://totem.cmds.cl/totem-admin/public/login" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🪪</div>
+              <span class="service-badge">Funcionarios</span>
+            </div>
+            <h3>Portal del Trabajador</h3>
+            <p>Autoatención de recursos humanos, liquidaciones y certificados para colaboradores CMDS.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ingresar a Tótem</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 10. Mail Corporativo & Office 365 -->
+        <a href="https://outlook.office.com/" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">✉️</div>
+              <span class="service-badge">Funcionarios</span>
+            </div>
+            <h3>Mail Corporativo & Office</h3>
+            <p>Correo institucional Outlook y acceso directo a Word, Excel y PowerPoint Web.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Abrir correo</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 11. Plataforma CMDS / Intranet Escolar -->
+        <a href="https://www.cmds.cl/plataformacmds/" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🗂️</div>
+              <span class="service-badge">Funcionarios</span>
+            </div>
+            <h3>Plataforma CMDS & Intranet</h3>
+            <p>Acceso unificado a sistemas administrativos internos, Intranet Escolar y emisión de documentos.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ingresar</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 12. Verificadores de Honorarios -->
+        <a href="https://cmds.pad.cl:3443/cmds_evidencia_prod/login/" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">✅</div>
+              <span class="service-badge">Funcionarios</span>
+            </div>
+            <h3>Verificadores de Honorarios</h3>
+            <p>Plataforma de carga de evidencias y respaldo de actividades para prestadores a honorarios.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Subir evidencias</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 13. Ticket Informático / Soporte -->
+        <a href="http://www.soporte.cmds.cl/" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🛠️</div>
+              <span class="service-badge">Soporte TI</span>
+            </div>
+            <h3>Ticket Informático</h3>
+            <p>Mesa de ayuda tecnológica para reportar incidencias de equipos, redes y sistemas.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Generar ticket</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 14. Soporte en Línea TeamViewer & Dimacofi -->
+        <a href="https://get.teamviewer.com/8rf3snz" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🖥️</div>
+              <span class="service-badge">Soporte Remoto</span>
+            </div>
+            <h3>Soporte en Línea Remoto</h3>
+            <p>Asistencia remota inmediata vía TeamViewer y enlace a mesa de soporte de impresión Dimacofi.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Conectar asistencia</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 15. Soporte Obras (SOS CMDS) -->
+        <a href="http://sos.cmds.cl/" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🏗️</div>
+              <span class="service-badge">Infraestructura</span>
+            </div>
+            <h3>Soporte Obras (SOS CMDS)</h3>
+            <p>Requerimientos de mantención e infraestructura para establecimientos y centros de salud.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ingresar solicitud</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 16. Bono Post-Laboral -->
+        <a href="https://www.cmds.cl/wp-content/uploads/2023/01/Requisitos_-Bono_Post_Laboral_2023.pdf" target="_blank" rel="noopener" class="service-card" data-cat="funcionarios">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">📋</div>
+              <span class="service-badge">RRHH</span>
+            </div>
+            <h3>Requisitos Bono Post-Laboral</h3>
+            <p>Información y documentación requerida para la tramitación del beneficio post-laboral.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Descargar PDF</span>
+            <span>↓</span>
+          </div>
+        </a>
+
+        <!-- 17. Portal Transparencia Activa -->
+        <a href="https://www.portaltransparencia.cl/PortalPdT/pdtta?codOrganismo=CM002" target="_blank" rel="noopener" class="service-card" data-cat="transparencia">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🔍</div>
+              <span class="service-badge">Transparencia</span>
+            </div>
+            <h3>Transparencia Activa (CM002)</h3>
+            <p>Acceso público a remuneraciones, compras, actos administrativos, presupuesto y auditorías.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Abrir Portal Transparencia</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 18. Propuestas Públicas Salud y Educación -->
+        <a href="https://www.cmds.cl/propuestas-publicas-salud/" class="service-card" data-cat="transparencia">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">📑</div>
+              <span class="service-badge">Adquisiciones</span>
+            </div>
+            <h3>Propuestas Públicas y Licitaciones</h3>
+            <p>Bases y llamados a licitación de las áreas de Salud, Educación y Mercado Público.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ver licitaciones</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 19. Trabaja con Nosotros -->
+        <a href="https://www.cmds.cl/trabaja-con-nosotros/" class="service-card" data-cat="transparencia">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">💼</div>
+              <span class="service-badge">Empleo</span>
+            </div>
+            <h3>Trabaja con Nosotros</h3>
+            <p>Convocatorias vigentes para profesionales, técnicos, docentes y asistentes en CMDS.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ver ofertas laborales</span>
+            <span>→</span>
+          </div>
+        </a>
+
+        <!-- 20. Alta Dirección Pública -->
+        <a href="https://www.directoresparachile.cl/pub/convocatorias/convocatorias.aspx?s=1&convocatorias-abiertas&r=3" target="_blank" rel="noopener" class="service-card" data-cat="transparencia">
+          <div>
+            <div class="service-card-top">
+              <div class="service-icon-box">🏛️</div>
+              <span class="service-badge">Concursos Públicos</span>
+            </div>
+            <h3>Alta Dirección Pública</h3>
+            <p>Concursos abiertos para directores/as de establecimientos a través de Directores para Chile.</p>
+          </div>
+          <div class="service-card-footer">
+            <span>Ver convocatorias</span>
+            <span>→</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RED COMUNAL DE SALUD Y EDUCACIÓN (ACCESO DIRECTO A CESFAM Y NIVELES EDUCATIVOS) -->
+  <section class="pillars-section">
+    <div class="container">
+      <div class="pillars-grid">
+
+        <!-- Pilar 1: Atención Primaria de Salud -->
+        <div class="pillar-panel">
+          <div class="pillar-banner salud-banner">
+            <span class="pillar-kicker">Dirección de Salud · APS</span>
+            <h3>Red de Atención Primaria de Salud</h3>
+            <p>Cuidado integral, preventivo y oportuno para las familias de Antofagasta a través de nuestra red de centros de salud.</p>
+            <div class="pillar-stats">
+              <div class="pillar-stat">
+                <strong>8</strong>
+                <span>CESFAM en la comuna</span>
+              </div>
+              <div class="pillar-stat">
+                <strong>2</strong>
+                <span>Centros CECOSF</span>
+              </div>
+              <div class="pillar-stat">
+                <strong>SAR + Lab</strong>
+                <span>Urgencia y Diagnóstico</span>
+              </div>
+            </div>
+          </div>
+          <div class="pillar-body">
+            <div>
+              <p style="font-size:0.84rem;font-weight:700;color:var(--text-secondary);margin-bottom:10px;">Selecciona un centro para ver ubicación, horarios y prestaciones:</p>
+              <div class="network-chips">
+                <a href="https://www.cmds.cl/cesfam-centro-sur/" class="network-chip">🏥 CESFAM Centro Sur</a>
+                <a href="https://www.cmds.cl/cesfam-maria-cristina-rojas/" class="network-chip">🏥 CESFAM M. Cristina Rojas</a>
+                <a href="https://www.cmds.cl/cesfam-corvallis/" class="network-chip">🏥 CESFAM Corvallis</a>
+                <a href="https://www.cmds.cl/cesfam-central-oriente/" class="network-chip">🏥 CESFAM Central Oriente</a>
+                <a href="https://www.cmds.cl/cesfam-norte/" class="network-chip">🏥 CESFAM Norte</a>
+                <a href="https://www.cmds.cl/cesfam-rendic/" class="network-chip">🏥 CESFAM Dr. A. Rendic</a>
+                <a href="https://www.cmds.cl/cesfam-juan-pablo-ii/" class="network-chip">🏥 CESFAM Juan Pablo II</a>
+                <a href="https://www.cmds.cl/cesfam-valdivieso/" class="network-chip">🏥 CESFAM Valdivieso</a>
+                <a href="https://www.cmds.cl/cecosf-la-chimba/" class="network-chip">➕ CECOSF La Chimba</a>
+                <a href="https://www.cmds.cl/cecosf-coviefi/" class="network-chip">➕ CECOSF Coviefi</a>
+                <a href="https://www.cmds.cl/sar-coviefi/" class="network-chip">🚑 SAR Coviefi</a>
+                <a href="https://www.cmds.cl/central-de-servicios/" class="network-chip">🔬 Lab. Sarita Núñez</a>
+              </div>
+            </div>
+            <div class="pillar-footer-links">
+              <a href="https://www.cmds.cl/direccion-de-salud/" class="btn-pillar">Conocer Dirección de Salud →</a>
+              <a href="https://www.cmds.cl/plan-comunal/" class="btn-pillar outline">📄 Plan Comunal de Salud</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pilar 2: Educación Pública Municipal -->
+        <div class="pillar-panel">
+          <div class="pillar-banner educacion-banner">
+            <span class="pillar-kicker">Dirección de Educación</span>
+            <h3>Red de Educación Pública CMDS</h3>
+            <p>Formación inclusiva, de excelencia y con sello valórico desde la primera infancia hasta la educación media y técnico-profesional.</p>
+            <div class="pillar-stats">
+              <div class="pillar-stat">
+                <strong>Parvularia</strong>
+                <span>Jardines y Escuelas de Párvulos</span>
+              </div>
+              <div class="pillar-stat">
+                <strong>Básica y Media</strong>
+                <span>Escuelas y Liceos HC / TP</span>
+              </div>
+              <div class="pillar-stat">
+                <strong>Inclusión</strong>
+                <span>PIE, Psicosocial y Extraescolar</span>
+              </div>
+            </div>
+          </div>
+          <div class="pillar-body">
+            <div>
+              <p style="font-size:0.84rem;font-weight:700;color:var(--text-secondary);margin-bottom:10px;">Explora nuestros niveles educativos y programas de apoyo al estudiante:</p>
+              <div class="network-chips">
+                <a href="https://www.cmds.cl/educacion-parvularia/" class="network-chip">🧸 Educación Parvularia</a>
+                <a href="https://www.cmds.cl/educacion-basica/" class="network-chip">📘 Educación Básica</a>
+                <a href="https://www.cmds.cl/educacion-media/" class="network-chip">🎓 Educación Media</a>
+                <a href="https://www.cmds.cl/programa-de-integracion-escolar/" class="network-chip">🤝 Programa Integración (PIE)</a>
+                <a href="https://www.cmds.cl/departamento-psicosocial/" class="network-chip">💬 Depto. Psicosocial</a>
+                <a href="https://www.cmds.cl/departamento-extraescolar/" class="network-chip">🏆 Depto. Extraescolar</a>
+                <a href="https://www.cmds.cl/postulacion-educacion-parvularia-cmds-2027/" class="network-chip">📝 Admisión Parvularia 2027</a>
+                <a href="https://www.cmds.cl/propuestas-publicas-educacion/" class="network-chip">📑 Propuestas Públicas Educación</a>
+              </div>
+            </div>
+            <div class="pillar-footer-links">
+              <a href="https://www.cmds.cl/direccion-de-educacion/" class="btn-pillar">Conocer Dirección de Educación →</a>
+              <a href="https://www.cmds.cl/plan-comunal-2/" class="btn-pillar outline">📄 PADEM Vigente</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN NOTICIAS Y ACTUALIDAD CMDS (CARGA RÁPIDA DE LAS 6 ÚLTIMAS NOTICIAS REALES) -->
+  <section class="news-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <span class="section-eyebrow">Comunicaciones CMDS</span>
+          <h2 class="section-title">Actualidad en Salud y Educación</h2>
+          <p class="section-subtitle">Últimos hitos, actividades en terreno y noticias de nuestros establecimientos educacionales y centros de salud.</p>
+        </div>
+        <a href="https://www.cmds.cl/noticias-2/" class="btn-pillar">Ver archivo completo de noticias →</a>
+      </div>
+
+      <div class="news-grid">
+        <!-- Noticia 1 -->
+        <article class="news-card">
+          <a href="https://www.cmds.cl/estudiantes-de-la-escuela-general-manuel-baquedano-aprendieron-sobre-prevencion-y-preparacion-ante-los-desastres/" class="news-thumb-wrap">
+            <img src="https://www.cmds.cl/wp-content/uploads/2026/10/riesgos-baquedano-web-scaled.jpg" alt="Escuela General Manuel Baquedano" loading="lazy" />
+            <span class="news-cat-pill educacion">Educación</span>
+          </a>
+          <div class="news-body">
+            <div>
+              <div class="news-meta">📅 21 de octubre, 2026</div>
+              <a href="https://www.cmds.cl/estudiantes-de-la-escuela-general-manuel-baquedano-aprendieron-sobre-prevencion-y-preparacion-ante-los-desastres/">
+                <h3 class="news-title">Estudiantes de la Escuela “General Manuel Baquedano” aprendieron sobre prevención y preparación ante los desastres</h3>
+              </a>
+            </div>
+            <a href="https://www.cmds.cl/estudiantes-de-la-escuela-general-manuel-baquedano-aprendieron-sobre-prevencion-y-preparacion-ante-los-desastres/" class="news-readmore">Leer nota completa →</a>
+          </div>
+        </article>
+
+        <!-- Noticia 2 -->
+        <article class="news-card">
+          <a href="https://www.cmds.cl/10546-2/" class="news-thumb-wrap">
+            <img src="https://www.cmds.cl/wp-content/uploads/2026/10/certificacion-cesfam-valdivieso-web-scaled.jpg" alt="CESFAM Valdivieso Sello Neurodiversidad" loading="lazy" />
+            <span class="news-cat-pill salud">Salud APS</span>
+          </a>
+          <div class="news-body">
+            <div>
+              <div class="news-meta">📅 20 de octubre, 2026</div>
+              <a href="https://www.cmds.cl/10546-2/">
+                <h3 class="news-title">CESFAM Valdivieso es el primero de la red APS en recibir el sello “Espacio Amigable con la Neurodiversidad”</h3>
+              </a>
+            </div>
+            <a href="https://www.cmds.cl/10546-2/" class="news-readmore">Leer nota completa →</a>
+          </div>
+        </article>
+
+        <!-- Noticia 3 -->
+        <article class="news-card">
+          <a href="https://www.cmds.cl/10538-2/" class="news-thumb-wrap">
+            <img src="https://www.cmds.cl/wp-content/uploads/2026/10/plaza-cancer-web-scaled.jpg" alt="Plaza Ciudadana Día Contra el Cáncer de Mama" loading="lazy" />
+            <span class="news-cat-pill comunidad">Prevención</span>
+          </a>
+          <div class="news-body">
+            <div>
+              <div class="news-meta">📅 19 de octubre, 2026</div>
+              <a href="https://www.cmds.cl/10538-2/">
+                <h3 class="news-title">Plaza ciudadana por el Día Contra el Cáncer de Mama permitió acercar las prestaciones a la comunidad</h3>
+              </a>
+            </div>
+            <a href="https://www.cmds.cl/10538-2/" class="news-readmore">Leer nota completa →</a>
+          </div>
+        </article>
+
+        <!-- Noticia 4 -->
+        <article class="news-card">
+          <a href="https://www.cmds.cl/10523-2/" class="news-thumb-wrap">
+            <img src="https://www.cmds.cl/wp-content/uploads/2026/10/escuela-españa-web--scaled.jpg" alt="Mejoramiento Escuela España" loading="lazy" />
+            <span class="news-cat-pill educacion">Infraestructura</span>
+          </a>
+          <div class="news-body">
+            <div>
+              <div class="news-meta">📅 16 de octubre, 2026</div>
+              <a href="https://www.cmds.cl/10523-2/">
+                <h3 class="news-title">Proyecto de conservación permite mejoramiento de cancha y cierres perimetrales de la Escuela España</h3>
+              </a>
+            </div>
+            <a href="https://www.cmds.cl/10523-2/" class="news-readmore">Leer nota completa →</a>
+          </div>
+        </article>
+
+        <!-- Noticia 5 -->
+        <article class="news-card">
+          <a href="https://www.cmds.cl/centros-de-salud-conmemoraron-el-dia-de-la-salud-mental-entregando-informacion-a-la-comunidad/" class="news-thumb-wrap">
+            <img src="https://www.cmds.cl/wp-content/uploads/2026/10/web-salud-mental--scaled.jpg" alt="Día de la Salud Mental" loading="lazy" />
+            <span class="news-cat-pill salud">Salud Mental</span>
+          </a>
+          <div class="news-body">
+            <div>
+              <div class="news-meta">📅 13 de octubre, 2026</div>
+              <a href="https://www.cmds.cl/centros-de-salud-conmemoraron-el-dia-de-la-salud-mental-entregando-informacion-a-la-comunidad/">
+                <h3 class="news-title">Centros de Salud conmemoraron el Día de la Salud Mental entregando información a la comunidad</h3>
+              </a>
+            </div>
+            <a href="https://www.cmds.cl/centros-de-salud-conmemoraron-el-dia-de-la-salud-mental-entregando-informacion-a-la-comunidad/" class="news-readmore">Leer nota completa →</a>
+          </div>
+        </article>
+
+        <!-- Noticia 6 -->
+        <article class="news-card">
+          <a href="https://www.cmds.cl/10506-2/" class="news-thumb-wrap">
+            <img src="https://www.cmds.cl/wp-content/uploads/2026/10/paliativos-web-scaled.jpg" alt="Cuidados Paliativos APS" loading="lazy" />
+            <span class="news-cat-pill salud">Salud APS</span>
+          </a>
+          <div class="news-body">
+            <div>
+              <div class="news-meta">📅 9 de octubre, 2026</div>
+              <a href="https://www.cmds.cl/10506-2/">
+                <h3 class="news-title">Atención Primaria de Salud acompaña a pacientes y familias que requieren cuidados paliativos</h3>
+              </a>
+            </div>
+            <a href="https://www.cmds.cl/10506-2/" class="news-readmore">Leer nota completa →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FRANJA CAMPAÑA INSTITUCIONAL (MANUAL DE NORMAS GRÁFICAS PÁG. 9) -->
+  <section class="campaign-strip">
+    <div class="container">
+      <div class="campaign-box">
+        <div class="campaign-text">
+          <h3>“Construyamos espacios seguros: cero violencia, 100% respeto.”</h3>
+          <p>Compromiso institucional de la Corporación Municipal de Desarrollo Social con la comunidad educativa, de salud y sus trabajadores.</p>
+        </div>
+        <div class="campaign-actions">
+          <a href="https://www.cmds.cl/trabaja-con-nosotros/" class="btn-campaign">💼 Postula a Ofertas Laborales</a>
+          <a href="https://www.cmds.cl/contacto/" class="btn-campaign" style="background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.35);">✉️ Contáctanos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIE DE PÁGINA OFICIAL (CON CO-BRANDING MUNICIPALIDAD Y NORMAS 2026) -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-logos">
+            <img src="assets/logo-cmds-oscuro.png" alt="CMDS Antofagasta" class="footer-logo-cmds" />
+            <img src="assets/logo-muni-antofagasta.png" alt="Ilustre Municipalidad de Antofagasta" class="footer-logo-muni" />
+          </div>
+          <div class="footer-slogan">“Educación que transforma, salud que protege”</div>
+          <p class="footer-desc">
+            Corporación Municipal de Desarrollo Social de Antofagasta. Administración y gestión de los servicios de Educación Pública y Atención Primaria de Salud de la comuna.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Institucional</h4>
+          <ul class="footer-links">
+            <li><a href="https://www.cmds.cl/somos/">Somos CMDS</a></li>
+            <li><a href="https://www.cmds.cl/directorio/">Directorio Institucional</a></li>
+            <li><a href="https://www.cmds.cl/presidencia-2/">Presidencia</a></li>
+            <li><a href="https://www.cmds.cl/secretaria-ejecutiva/">Secretaría Ejecutiva</a></li>
+            <li><a href="https://www.cmds.cl/memoria/">Memoria Institucional</a></li>
+            <li><a href="https://www.cmds.cl/reglamento-interno/">Reglamento Interno</a></li>
+            <li><a href="https://www.portaltransparencia.cl/PortalPdT/pdtta?codOrganismo=CM002" target="_blank">Transparencia Activa (CM002)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Portales Frecuentes</h4>
+          <ul class="footer-links">
+            <li><a href="https://horasalud.cl/web/portal/" target="_blank">Reserva de Hora Salud</a></li>
+            <li><a href="https://cmds-portaleduca.pad.cl:2443/login_ctrl/" target="_blank">Portal Alumnos y Apoderados</a></li>
+            <li><a href="https://cmds-portaleduca.pad.cl:2443/verificar_certificado/" target="_blank">Verificación de Certificados</a></li>
+            <li><a href="https://cmds.pad.cl:2443/login/" target="_blank">Plataforma CMDS Educa</a></li>
+            <li><a href="https://totem.cmds.cl/totem-admin/public/login" target="_blank">Portal del Trabajador</a></li>
+            <li><a href="http://salud.cmds.cl/" target="_blank">Intranet Salud</a></li>
+            <li><a href="http://www.soporte.cmds.cl/" target="_blank">Soporte y Ticket Informático</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto Oficial</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <span class="footer-contact-icon">📍</span>
+              <div>
+                <strong>Casa Central CMDS</strong><br />
+                Avenida Argentina 1595, segundo piso.<br />Antofagasta, Chile.
+              </div>
+            </li>
+            <li>
+              <span class="footer-contact-icon">📞</span>
+              <div>
+                <strong>Mesa Central:</strong><br />
+                +56 55 255 3700 / 55 2 553707
+              </div>
+            </li>
+            <li>
+              <span class="footer-contact-icon">✉️</span>
+              <div>
+                <strong>Correos Institucionales:</strong><br />
+                comunicaciones@cmds.cl<br />
+                trabajaconnosotros.aps@cmds.cl
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Corporación Municipal de Desarrollo Social de Antofagasta (CMDS). Todos los derechos reservados.</span>
+        <span>Diseño actualizado según Manual de Normas Gráficas CMDS 2026 · Optimizado para Elementor</span>
+      </div>
+    </div>
+
+    <!-- Franja Multicolor Oficial al cierre del documento -->
+    <div class="brand-ribbon thick" role="presentation">
+      <div class="seg-blue"></div>
+      <div class="seg-teal"></div>
+      <div class="seg-amber"></div>
+      <div class="seg-pink"></div>
+    </div>
+  </footer>
+
+  <!-- BARRA FLOTANTE DE PRUEBA DE ESTILOS (SOLO EN PROTOTIPO) -->
+  <div class="prototype-toolbar" id="protoToolbar">
+    <span class="proto-badge">Maqueta 2026</span>
+    <span>Cabecera:</span>
+    <button class="proto-btn active" id="btnHeaderLight" onclick="setHeaderMode('light')">Fondo Claro (Normal)</button>
+    <button class="proto-btn" id="btnHeaderDark" onclick="setHeaderMode('dark')">Fondo Azul (#006098)</button>
+  </div>
+
+  <script>
+    // Control del Slider Hero
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.hero-slide');
+
+    function showSlide(idx) {
+      slides.forEach((s, i) => {
+        s.classList.toggle('active', i === idx);
+        const dots = s.querySelectorAll('.slider-dot');
+        dots.forEach((d, di) => d.classList.toggle('active', di === idx));
+      });
+      currentSlide = idx;
+    }
+
+    function changeSlide(dir) {
+      let next = (currentSlide + dir + slides.length) % slides.length;
+      showSlide(next);
+    }
+
+    function goToSlide(idx) {
+      showSlide(idx);
+    }
+
+    setInterval(() => {
+      changeSlide(1);
+    }, 7500);
+
+    // Filtrado interactivo del Centro de Servicios Digitales
+    function filterServices(cat, btn) {
+      document.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.service-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Cambio de modo de cabecera (Blanca vs Azul Corporativo #006098 según pág. 3 del Manual)
+    function setHeaderMode(mode) {
+      document.body.classList.toggle('header-dark', mode === 'dark');
+      document.getElementById('btnHeaderLight').classList.toggle('active', mode === 'light');
+      document.getElementById('btnHeaderDark').classList.toggle('active', mode === 'dark');
+    }
+
+    // Accesibilidad: Escala de fuente
+    function setFontScale(scale) {
+      document.documentElement.style.setProperty('--font-scale', scale);
+    }
+  </script>
+</body>
+</html>

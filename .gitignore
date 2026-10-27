@@ -1,0 +1,18 @@
+# Credenciales y archivos sensibles (NUNCA subir a GitHub)
+cpanel_cmdscl.txt
+*cpanel*.txt
+*credentials*
+*secret*
+.env
+.env.*
+wp-config.php
+
+# Archivos temporales y respaldos locales
+cmds_live_snapshot.html
+prototipo_2026/assets/extracted/
+*.sql
+*.sql.gz
+*.log
+error_log
+.DS_Store
+Thumbs.db
