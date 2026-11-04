@@ -1455,7 +1455,7 @@ body.header-dark .cmds-nav-link.active {
 }
 
 @media (max-width: 1120px) {
-  .hero-grid, .pillars-grid { grid-template-columns: 1fr; }
+  .hero-grid, .pillars-grid, .cmds-tv-layout { grid-template-columns: 1fr; }
   .services-grid, .news-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 860px) {
@@ -1463,4 +1463,311 @@ body.header-dark .cmds-nav-link.active {
   .services-grid, .news-grid, .footer-grid { grid-template-columns: 1fr; }
   .cmds-content-card { padding: 24px 20px; }
   .cmds-interior-title { font-size: 1.6rem; }
+}
+
+/* ==========================================================================
+   SECCIÓN CMDS TV · CANAL OFICIAL YOUTUBE (REPRODUCCIÓN ALEATORIA 24/7)
+   ========================================================================== */
+.cmds-tv-section {
+  padding: 58px 0 68px;
+  background: linear-gradient(155deg, #00233a 0%, #004670 55%, #006098 100%);
+  color: #ffffff;
+  position: relative;
+  border-top: 4px solid var(--cmds-amber);
+  border-bottom: 4px solid var(--cmds-teal);
+}
+.cmds-tv-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+.cmds-tv-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  background: rgba(235, 86, 126, 0.22);
+  border: 1px solid rgba(235, 86, 126, 0.55);
+  color: #ffbfd0;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+.cmds-live-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cmds-pink);
+  box-shadow: 0 0 0 4px rgba(235, 86, 126, 0.35);
+}
+.cmds-tv-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0 0 8px;
+}
+.cmds-tv-subtitle {
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 0.95rem;
+  max-width: 720px;
+  margin: 0;
+}
+.cmds-tv-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.btn-tv-action {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-tv-action:hover {
+  background: var(--cmds-amber);
+  color: #1f1300;
+  border-color: var(--cmds-amber);
+}
+.btn-tv-youtube {
+  background: var(--cmds-pink);
+  color: #ffffff !important;
+  padding: 10px 20px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 6px 18px rgba(235, 86, 126, 0.35);
+}
+.btn-tv-youtube:hover {
+  background: var(--cmds-pink-dark);
+  transform: translateY(-2px);
+}
+.cmds-tv-layout {
+  display: grid;
+  grid-template-columns: 1.65fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+.cmds-tv-player-card {
+  background: #061826;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(68, 186, 190, 0.35);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.38);
+  display: flex;
+  flex-direction: column;
+}
+.cmds-tv-video-frame {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: #000000;
+}
+.cmds-tv-video-frame iframe,
+.cmds-tv-video-frame #cmdsYoutubePlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.cmds-tv-unmute-overlay {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 15;
+  background: rgba(247, 165, 22, 0.95);
+  color: #1d1200;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 99px;
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.cmds-tv-unmute-overlay:hover {
+  background: #ffffff;
+}
+.cmds-tv-nowplaying-bar {
+  padding: 18px 22px;
+  background: linear-gradient(90deg, #071e30 0%, #0b2d48 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.cmds-tv-badge-random {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--cmds-teal);
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.cmds-tv-nowplaying-info h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0;
+}
+.cmds-tv-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cmds-tv-ctrl-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 8px 15px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cmds-tv-ctrl-btn.primary {
+  background: var(--cmds-teal);
+  color: #00263e;
+  border-color: var(--cmds-teal);
+}
+.cmds-tv-ctrl-btn:hover {
+  filter: brightness(1.1);
+}
+.cmds-tv-playlist-card {
+  background: rgba(7, 29, 46, 0.88);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  max-height: 540px;
+  overflow: hidden;
+}
+.cmds-tv-playlist-head {
+  padding: 16px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cmds-tv-playlist-head h4 {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0 0 2px;
+}
+.cmds-tv-playlist-head span {
+  font-size: 0.76rem;
+  color: var(--cmds-teal);
+  font-weight: 600;
+}
+.cmds-tv-shuffle-btn {
+  background: rgba(68, 186, 190, 0.18);
+  color: var(--cmds-teal);
+  border: 1px solid rgba(68, 186, 190, 0.45);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cmds-tv-shuffle-btn:hover {
+  background: var(--cmds-teal);
+  color: #00263e;
+}
+.cmds-tv-playlist-items {
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cmds-tv-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 8px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.cmds-tv-item:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: var(--cmds-teal);
+}
+.cmds-tv-item.active {
+  background: rgba(0, 96, 152, 0.55);
+  border-color: var(--cmds-amber);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+.cmds-tv-item-thumb {
+  position: relative;
+  width: 108px;
+  height: 62px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #000;
+}
+.cmds-tv-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cmds-tv-playing-pill {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  background: var(--cmds-amber);
+  color: #1f1300;
+  font-size: 0.64rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.cmds-tv-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.cmds-tv-item-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.cmds-tv-item-meta {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.65);
 }
