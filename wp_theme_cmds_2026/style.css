@@ -1697,6 +1697,11 @@ body.header-dark .cmds-nav-link.active {
   background: var(--cmds-teal);
   color: #00263e;
 }
+.cmds-tv-shuffle-btn.active {
+  background: var(--cmds-amber);
+  color: #1f1300;
+  border-color: var(--cmds-amber);
+}
 .cmds-tv-playlist-items {
   overflow-y: auto;
   padding: 12px;

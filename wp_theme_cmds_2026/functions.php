@@ -22,7 +22,7 @@ function cmds_2026_enqueue_assets() {
         'cmds-2026-main-style',
         get_stylesheet_directory_uri() . '/style.css',
         ['cmds-2026-google-fonts'],
-        '2026.1.4'
+        '2026.1.5'
     );
 }
 add_action('wp_enqueue_scripts', 'cmds_2026_enqueue_assets', 999);
@@ -172,22 +172,80 @@ add_action('send_headers', 'cmds_2026_enable_public_cache_headers', 999);
 add_action('template_redirect', 'cmds_2026_enable_public_cache_headers', 999);
 
 /**
- * Obtener catálogo actualizado de videos del Canal Oficial de YouTube de CMDS Antofagasta
- * Canal: @cmdsantofagasta3334 (ID: UC75MqC6uZAX6X5Gqe_d6mgw)
+ * Configuración de CMDS TV (YouTube): Canal Recientes vs Lista de Reproducción (Playlist)
+ */
+function cmds_2026_get_tv_settings() {
+    $defaults = [
+        'source_type' => 'channel', // 'channel' | 'playlist'
+        'channel_id'  => 'UC75MqC6uZAX6X5Gqe_d6mgw',
+        'playlist_id' => '',
+        'max_videos'  => 8,
+        'play_mode'   => 'recent', // 'recent' | 'random'
+    ];
+    $saved = get_option('cmds_2026_tv_settings', []);
+    if (!is_array($saved)) {
+        $saved = [];
+    }
+    return array_merge($defaults, $saved);
+}
+
+/**
+ * Extraer ID limpio de una Lista de Reproducción de YouTube desde URL o texto
+ */
+function cmds_2026_parse_playlist_id($input) {
+    $input = trim((string) $input);
+    if (empty($input)) {
+        return '';
+    }
+    if (preg_match('/[?&]list=([a-zA-Z0-9_-]+)/', $input, $m)) {
+        return $m[1];
+    }
+    return preg_replace('/[^a-zA-Z0-9_-]/', '', $input);
+}
+
+/**
+ * Limpiar caché rápida de páginas del portal 2026 al actualizar contenidos o ajustes
+ */
+function cmds_2026_flush_page_cache() {
+    $cache_dir = ABSPATH . 'wp-content/cache/cmds-2026';
+    if (is_dir($cache_dir)) {
+        foreach ((array) glob($cache_dir . '/*.html') as $f) {
+            if (is_file($f)) {
+                @unlink($f);
+            }
+        }
+    }
+}
+add_action('save_post', 'cmds_2026_flush_page_cache');
+add_action('deleted_post', 'cmds_2026_flush_page_cache');
+add_action('switch_theme', 'cmds_2026_flush_page_cache');
+
+/**
+ * Obtener catálogo actualizado de videos de CMDS TV (Canal Oficial o Playlist Predefinida)
+ * Canal Oficial: @cmdsantofagasta3334 (ID: UC75MqC6uZAX6X5Gqe_d6mgw)
  */
 function cmds_2026_get_youtube_channel_videos() {
-    $transient_key = 'cmds_2026_yt_videos_v1';
-    $cached = get_transient($transient_key);
+    $settings      = cmds_2026_get_tv_settings();
+    $source_type   = $settings['source_type'];
+    $channel_id    = !empty($settings['channel_id']) ? $settings['channel_id'] : 'UC75MqC6uZAX6X5Gqe_d6mgw';
+    $playlist_id   = cmds_2026_parse_playlist_id($settings['playlist_id']);
+    $max_videos    = max(1, min(15, (int) $settings['max_videos']));
+
+    $transient_key = 'cmds_2026_yt_v2_' . md5($source_type . '|' . $channel_id . '|' . $playlist_id . '|' . $max_videos);
+    $cached        = get_transient($transient_key);
     if (is_array($cached) && !empty($cached)) {
         return $cached;
     }
 
-    $channel_id = 'UC75MqC6uZAX6X5Gqe_d6mgw';
-    $feed_url   = 'https://www.youtube.com/feeds/videos.xml?channel_id=' . $channel_id;
-    $videos     = [];
+    if ($source_type === 'playlist' && !empty($playlist_id)) {
+        $feed_url = 'https://www.youtube.com/feeds/videos.xml?playlist_id=' . urlencode($playlist_id);
+    } else {
+        $feed_url = 'https://www.youtube.com/feeds/videos.xml?channel_id=' . urlencode($channel_id);
+    }
 
+    $videos   = [];
     $response = wp_remote_get($feed_url, [
-        'timeout'   => 3,
+        'timeout'   => 4,
         'sslverify' => false,
     ]);
 
@@ -211,9 +269,9 @@ function cmds_2026_get_youtube_channel_videos() {
     // Catálogo de respaldo oficial del canal @cmdsantofagasta3334
     if (empty($videos)) {
         $fallback = [
-            ['id' => '0oco1PTMEOA', 'title' => 'Iniciamos el Mes de los Niños junto a Perlita', 'date' => 'Canal CMDS'],
-            ['id' => 'qnF-tEHd1ZA', 'title' => 'Segunda Jornada Triatlón Antofagasta 2026', 'date' => 'Canal CMDS'],
-            ['id' => 'q7G9rsuz5XU', 'title' => 'Segunda Jornada Triatlón Antofagasta 2026 · Parte 2', 'date' => 'Canal CMDS'],
+            ['id' => '0oco1PTMEOA', 'title' => 'Iniciamos el Mes de los Niños junto a Perlita', 'date' => 'Reciente · CMDS'],
+            ['id' => 'qnF-tEHd1ZA', 'title' => 'Segunda Jornada Triatlón Antofagasta 2026', 'date' => 'Reciente · CMDS'],
+            ['id' => 'q7G9rsuz5XU', 'title' => 'Segunda Jornada Triatlón Antofagasta 2026 · Parte 2', 'date' => 'Reciente · CMDS'],
             ['id' => 'ZTqFREI6MnM', 'title' => 'Triatlón Antofagasta 2026 · Cobertura Especial', 'date' => 'Canal CMDS'],
             ['id' => 'eGF_L_g2Y2M', 'title' => 'Deporte y Comunidad · Triatlón Antofagasta 2026', 'date' => 'Canal CMDS'],
             ['id' => '_RnR5w5dhjE', 'title' => 'Jornada Deportiva Triatlón Antofagasta 2026', 'date' => 'Canal CMDS'],
@@ -231,8 +289,150 @@ function cmds_2026_get_youtube_channel_videos() {
         }
     }
 
+    $videos = array_slice($videos, 0, $max_videos);
     set_transient($transient_key, $videos, 2 * HOUR_IN_SECONDS);
     return $videos;
+}
+
+/**
+ * Panel de Administración en WordPress: "CMDS TV (YouTube)"
+ */
+function cmds_2026_register_tv_admin_menu() {
+    add_menu_page(
+        'CMDS TV · Canal YouTube',
+        'CMDS TV (YouTube)',
+        'manage_options',
+        'cmds-tv-youtube',
+        'cmds_2026_render_tv_admin_page',
+        'dashicons-video-alt3',
+        25
+    );
+}
+add_action('admin_menu', 'cmds_2026_register_tv_admin_menu');
+
+function cmds_2026_render_tv_admin_page() {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    $notice = '';
+    if (isset($_POST['cmds_tv_save_nonce']) && wp_verify_nonce($_POST['cmds_tv_save_nonce'], 'cmds_tv_save_action')) {
+        $new_settings = [
+            'source_type' => (isset($_POST['source_type']) && $_POST['source_type'] === 'playlist') ? 'playlist' : 'channel',
+            'channel_id'  => sanitize_text_field($_POST['channel_id'] ?? 'UC75MqC6uZAX6X5Gqe_d6mgw'),
+            'playlist_id' => cmds_2026_parse_playlist_id($_POST['playlist_id'] ?? ''),
+            'max_videos'  => max(1, min(15, (int) ($_POST['max_videos'] ?? 8))),
+            'play_mode'   => (isset($_POST['play_mode']) && $_POST['play_mode'] === 'random') ? 'random' : 'recent',
+        ];
+        update_option('cmds_2026_tv_settings', $new_settings);
+        cmds_2026_flush_page_cache();
+        $notice = 'Ajustes guardados y caché de portada actualizada correctamente.';
+    }
+
+    $s      = cmds_2026_get_tv_settings();
+    $videos = cmds_2026_get_youtube_channel_videos();
+    ?>
+    <div class="wrap" style="max-width:920px;">
+      <h1 style="display:flex;align-items:center;gap:10px;color:#006098;font-weight:800;">
+        <span class="dashicons dashicons-video-alt3" style="font-size:28px;width:28px;height:28px;color:#eb567e;"></span>
+        CMDS TV · Configuración del Canal de YouTube en Portada
+      </h1>
+      <p style="font-size:14px;color:#475569;">
+        Desde este panel puedes elegir si el reproductor del portal muestra los <strong>videos más recientes subidos al canal oficial de CMDS</strong> o una <strong>Lista de Reproducción (Playlist) específica</strong> creada en YouTube, así como el orden inicial de reproducción.
+      </p>
+
+      <?php if ($notice) : ?>
+        <div class="notice notice-success is-dismissible"><p><strong><?php echo esc_html($notice); ?></strong></p></div>
+      <?php endif; ?>
+
+      <form method="post" style="background:#fff;padding:24px 28px;border-radius:12px;border:1px solid #cbd5e1;box-shadow:0 4px 14px rgba(0,0,0,0.05);margin-top:16px;">
+        <?php wp_nonce_field('cmds_tv_save_action', 'cmds_tv_save_nonce'); ?>
+
+        <table class="form-table" role="presentation">
+          <tr>
+            <th scope="row"><label>1. Origen de los Videos</label></th>
+            <td>
+              <label style="display:block;margin-bottom:10px;font-weight:600;">
+                <input type="radio" name="source_type" value="channel" <?php checked($s['source_type'], 'channel'); ?> />
+                🕒 <strong>Videos más recientes del Canal Oficial CMDS</strong> (Automático al subir un video al canal)
+              </label>
+              <label style="display:block;font-weight:600;">
+                <input type="radio" name="source_type" value="playlist" <?php checked($s['source_type'], 'playlist'); ?> />
+                📋 <strong>Lista de Reproducción predefinida (Playlist de YouTube)</strong> (Solo reproduce los videos de esa lista)
+              </label>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row"><label for="playlist_id">2. URL o ID de Lista de Reproducción (Playlist)</label></th>
+            <td>
+              <input type="text" id="playlist_id" name="playlist_id" value="<?php echo esc_attr($s['playlist_id']); ?>" class="regular-text" style="width:100%;max-width:520px;" placeholder="Ej: https://www.youtube.com/playlist?list=PLxxxxxxxx o PLxxxxxxxx" />
+              <p class="description">Si seleccionaste "Lista de Reproducción predefinida", pega aquí el enlace o código <code>PL...</code> de la lista creada en YouTube.</p>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row"><label for="max_videos">3. Cantidad de Videos Recientes a Incluir</label></th>
+            <td>
+              <select id="max_videos" name="max_videos">
+                <?php foreach ([3, 5, 6, 8, 10, 12, 15] as $num) : ?>
+                  <option value="<?php echo (int) $num; ?>" <?php selected((int) $s['max_videos'], $num); ?>>
+                    Últimos <?php echo (int) $num; ?> videos más recientes
+                  </option>
+                <?php endforeach; ?>
+              </select>
+              <p class="description">Limita la rotación únicamente a los videos más nuevos para mantener siempre contenido vigente en la portada.</p>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row"><label>4. Modo de Reproducción al Iniciar</label></th>
+            <td>
+              <label style="display:block;margin-bottom:10px;font-weight:600;">
+                <input type="radio" name="play_mode" value="recent" <?php checked($s['play_mode'], 'recent'); ?> />
+                🕒 <strong>Más recientes primero (Recomendado):</strong> Inicia siempre con el último video publicado y avanza en orden de estreno (el visitante también puede cambiar a modo aleatorio con un clic).
+              </label>
+              <label style="display:block;font-weight:600;">
+                <input type="radio" name="play_mode" value="random" <?php checked($s['play_mode'], 'random'); ?> />
+                🔀 <strong>Aleatorio (Shuffle):</strong> Mezcla al azar el lote de videos seleccionados en cada visita.
+              </label>
+            </td>
+          </tr>
+
+          <tr>
+            <th scope="row"><label for="channel_id">ID del Canal Oficial YouTube</label></th>
+            <td>
+              <input type="text" id="channel_id" name="channel_id" value="<?php echo esc_attr($s['channel_id']); ?>" class="regular-text" />
+              <p class="description">Por defecto: <code>UC75MqC6uZAX6X5Gqe_d6mgw</code> (Canal <strong>@cmdsantofagasta3334</strong>).</p>
+            </td>
+          </tr>
+        </table>
+
+        <p class="submit" style="margin-bottom:0;">
+          <button type="submit" class="button button-primary button-hero" style="background:#006098;border-color:#004670;">
+            💾 Guardar Configuración y Actualizar Portada
+          </button>
+        </p>
+      </form>
+
+      <div style="background:#f8fafc;padding:20px 24px;border-radius:12px;border:1px solid #e2e8f0;margin-top:20px;">
+        <h3 style="margin-top:0;color:#0f172a;">📺 Vista previa de la cola activa (<?php echo count($videos); ?> videos detectados)</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));gap:12px;">
+          <?php foreach ($videos as $idx => $v) : ?>
+            <div style="background:#fff;border:1px solid #cbd5e1;border-radius:8px;padding:10px;display:flex;gap:10px;align-items:center;">
+              <img src="<?php echo esc_url($v['thumb']); ?>" alt="" style="width:78px;height:46px;object-fit:cover;border-radius:6px;flex-shrink:0;" />
+              <div style="min-width:0;">
+                <div style="font-size:11px;font-weight:700;color:#006098;">#<?php echo (int) ($idx + 1); ?> · <?php echo esc_html($v['date']); ?></div>
+                <div style="font-size:12px;font-weight:600;color:#1e293b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="<?php echo esc_attr($v['title']); ?>">
+                  <?php echo esc_html($v['title']); ?>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+    </div>
+    <?php
 }
 
 /**

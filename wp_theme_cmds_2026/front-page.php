@@ -525,25 +525,32 @@ if ($recent_query->have_posts()) {
   </section>
 
   <?php
+  $tv_settings = function_exists('cmds_2026_get_tv_settings') ? cmds_2026_get_tv_settings() : [
+      'source_type' => 'channel',
+      'play_mode'   => 'recent',
+      'max_videos'  => 8,
+  ];
   $yt_videos = function_exists('cmds_2026_get_youtube_channel_videos') ? cmds_2026_get_youtube_channel_videos() : [];
+  $initial_mode = ($tv_settings['play_mode'] === 'random') ? 'random' : 'recent';
+  $source_label = ($tv_settings['source_type'] === 'playlist') ? 'Lista de Reproducción Destacada' : 'Últimos ' . count($yt_videos) . ' estrenos del Canal';
   ?>
-  <!-- SECCIÓN CMDS TV: CANAL OFICIAL YOUTUBE CON REPRODUCCIÓN ALEATORIA Y CONTINUA -->
+  <!-- SECCIÓN CMDS TV: CANAL OFICIAL YOUTUBE (RECIENTES / PLAYLIST / ALEATORIO CONTINUO) -->
   <section class="cmds-tv-section" id="cmds-tv">
     <div class="cmds-container">
       <div class="cmds-tv-header">
         <div>
           <span class="cmds-tv-eyebrow">
             <span class="cmds-live-dot"></span>
-            Señal Audiovisual Continua · Reproducción Aleatoria 24/7
+            Señal Audiovisual Continua · <?php echo esc_html($source_label); ?>
           </span>
           <h2 class="cmds-tv-title">CMDS TV · Canal Oficial de YouTube</h2>
           <p class="cmds-tv-subtitle">
-            Conectado directamente al canal oficial <strong>@cmdsantofagasta3334</strong>. Los contenidos institucionales, educativos, deportivos y de salud se reproducen de forma aleatoria y continua.
+            Conectado automáticamente al canal oficial <strong>@cmdsantofagasta3334</strong>. Reproduce de forma continua los videos más recientes o listas de reproducción institucionales de educación, salud y comunidad.
           </p>
         </div>
         <div class="cmds-tv-header-actions">
-          <button type="button" class="btn-tv-action" onclick="cmdsYtPlayRandomNext()">
-            🔀 Saltar a otro video aleatorio
+          <button type="button" class="btn-tv-action" onclick="cmdsYtPlayNext()">
+            ⏭️ Siguiente Video
           </button>
           <a href="https://www.youtube.com/@cmdsantofagasta3334?sub_confirmation=1" target="_blank" rel="noopener" class="btn-tv-youtube">
             ▶ Suscribirse al Canal YouTube ↗
@@ -562,33 +569,40 @@ if ($recent_query->have_posts()) {
           </div>
           <div class="cmds-tv-nowplaying-bar">
             <div class="cmds-tv-nowplaying-info">
-              <span class="cmds-tv-badge-random">🔀 MODO ALEATORIO CONTINUO</span>
+              <span class="cmds-tv-badge-random" id="cmdsTvModeBadge">
+                <?php echo $initial_mode === 'random' ? '🔀 REPRODUCCIÓN CONTINUA · MODO ALEATORIO' : '🕒 REPRODUCCIÓN CONTINUA · MÁS RECIENTES PRIMERO'; ?>
+              </span>
               <h3 id="cmdsTvCurrentTitle">Cargando programación de CMDS TV...</h3>
             </div>
             <div class="cmds-tv-controls">
               <button type="button" class="cmds-tv-ctrl-btn" id="cmdsTvMuteBtn" onclick="cmdsYtToggleMute()">
                 🔇 Activar Audio
               </button>
-              <button type="button" class="cmds-tv-ctrl-btn primary" onclick="cmdsYtPlayRandomNext()">
-                ⏭️ Siguiente Aleatorio
+              <button type="button" class="cmds-tv-ctrl-btn primary" onclick="cmdsYtPlayNext()">
+                ⏭️ Siguiente Video
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Cola Aleatoria Interactiva del Canal -->
+        <!-- Cola Interactiva del Canal (Selector Recientes vs Aleatorio) -->
         <div class="cmds-tv-playlist-card">
           <div class="cmds-tv-playlist-head">
             <div>
-              <h4>Programación del Canal</h4>
-              <span>Orden aleatorio automático · <?php echo count($yt_videos); ?> videos recientes</span>
+              <h4>Programación CMDS TV</h4>
+              <span id="cmdsTvQueueSubtitle"><?php echo esc_html($source_label); ?></span>
             </div>
-            <button type="button" class="cmds-tv-shuffle-btn" onclick="cmdsYtReshuffleQueue()" title="Reordenar al azar">
-              🔀 Mezclar
-            </button>
+            <div style="display:flex;gap:6px;">
+              <button type="button" class="cmds-tv-shuffle-btn <?php echo $initial_mode === 'recent' ? 'active' : ''; ?>" id="btnModeRecent" onclick="cmdsYtSetMode('recent')" title="Ordenar del más reciente al más antiguo">
+                🕒 Recientes
+              </button>
+              <button type="button" class="cmds-tv-shuffle-btn <?php echo $initial_mode === 'random' ? 'active' : ''; ?>" id="btnModeRandom" onclick="cmdsYtSetMode('random')" title="Mezclar videos al azar">
+                🔀 Aleatorio
+              </button>
+            </div>
           </div>
           <div class="cmds-tv-playlist-items" id="cmdsTvPlaylist">
-            <!-- Se llena dinámicamente con la cola mezclada -->
+            <!-- Se llena dinámicamente según el modo activo -->
           </div>
         </div>
       </div>
@@ -630,9 +644,10 @@ if ($recent_query->have_posts()) {
     }
 
     /* =====================================================================
-       MOTOR DE REPRODUCCIÓN ALEATORIA Y CONTINUA - CANAL YOUTUBE CMDS TV
+       MOTOR DE REPRODUCCIÓN CONTINUA (RECIENTES / PLAYLIST / ALEATORIO)
        ===================================================================== */
     var cmdsYtRawCatalog = <?php echo wp_json_encode(array_values($yt_videos)); ?>;
+    var cmdsYtMode = <?php echo wp_json_encode($initial_mode); ?>;
     var cmdsYtQueue = [];
     var cmdsYtCurrentIndex = 0;
     var cmdsYtPlayer = null;
@@ -647,6 +662,14 @@ if ($recent_query->have_posts()) {
         copy[j] = temp;
       }
       return copy;
+    }
+
+    function cmdsBuildQueueByMode(mode) {
+      if (!cmdsYtRawCatalog || !cmdsYtRawCatalog.length) return [];
+      if (mode === 'random') {
+        return cmdsShuffleArray(cmdsYtRawCatalog);
+      }
+      return cmdsYtRawCatalog.slice();
     }
 
     function cmdsRenderYtPlaylist() {
@@ -672,6 +695,18 @@ if ($recent_query->have_posts()) {
       if (titleEl && cmdsYtQueue[cmdsYtCurrentIndex]) {
         titleEl.textContent = cmdsYtQueue[cmdsYtCurrentIndex].title;
       }
+      var badgeEl = document.getElementById('cmdsTvModeBadge');
+      if (badgeEl) {
+        badgeEl.textContent = (cmdsYtMode === 'random')
+          ? '🔀 REPRODUCCIÓN CONTINUA · MODO ALEATORIO'
+          : '🕒 REPRODUCCIÓN CONTINUA · MÁS RECIENTES PRIMERO';
+      }
+      var bRec = document.getElementById('btnModeRecent');
+      var bRnd = document.getElementById('btnModeRandom');
+      if (bRec && bRnd) {
+        bRec.classList.toggle('active', cmdsYtMode === 'recent');
+        bRnd.classList.toggle('active', cmdsYtMode === 'random');
+      }
     }
 
     function cmdsYtPlayByIndex(idx) {
@@ -683,18 +718,21 @@ if ($recent_query->have_posts()) {
       }
     }
 
-    function cmdsYtPlayRandomNext() {
+    function cmdsYtPlayNext() {
       if (!cmdsYtQueue.length) return;
       var nextIdx = cmdsYtCurrentIndex + 1;
       if (nextIdx >= cmdsYtQueue.length) {
-        cmdsYtQueue = cmdsShuffleArray(cmdsYtRawCatalog);
+        if (cmdsYtMode === 'random') {
+          cmdsYtQueue = cmdsShuffleArray(cmdsYtRawCatalog);
+        }
         nextIdx = 0;
       }
       cmdsYtPlayByIndex(nextIdx);
     }
 
-    function cmdsYtReshuffleQueue() {
-      cmdsYtQueue = cmdsShuffleArray(cmdsYtRawCatalog);
+    function cmdsYtSetMode(mode) {
+      cmdsYtMode = (mode === 'random') ? 'random' : 'recent';
+      cmdsYtQueue = cmdsBuildQueueByMode(cmdsYtMode);
       cmdsYtPlayByIndex(0);
     }
 
@@ -718,7 +756,9 @@ if ($recent_query->have_posts()) {
 
     function onYouTubeIframeAPIReady() {
       if (!cmdsYtRawCatalog || !cmdsYtRawCatalog.length) return;
-      cmdsYtQueue = cmdsShuffleArray(cmdsYtRawCatalog);
+      if (!cmdsYtQueue.length) {
+        cmdsYtQueue = cmdsBuildQueueByMode(cmdsYtMode);
+      }
       cmdsYtCurrentIndex = 0;
       cmdsRenderYtPlaylist();
 
@@ -737,14 +777,13 @@ if ($recent_query->have_posts()) {
             event.target.playVideo();
           },
           onStateChange: function(event) {
-            // Al terminar un video (ENDED = 0), pasar automáticamente al siguiente aleatorio
+            // Al terminar un video (ENDED = 0), pasar automáticamente al siguiente de la cola
             if (event.data === YT.PlayerState.ENDED) {
-              cmdsYtPlayRandomNext();
+              cmdsYtPlayNext();
             }
           },
           onError: function() {
-            // Si algún video tiene restricción, saltar de inmediato al siguiente aleatorio
-            cmdsYtPlayRandomNext();
+            cmdsYtPlayNext();
           }
         }
       });
@@ -752,7 +791,7 @@ if ($recent_query->have_posts()) {
 
     (function() {
       if (cmdsYtRawCatalog && cmdsYtRawCatalog.length) {
-        cmdsYtQueue = cmdsShuffleArray(cmdsYtRawCatalog);
+        cmdsYtQueue = cmdsBuildQueueByMode(cmdsYtMode);
         cmdsRenderYtPlaylist();
         var tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
