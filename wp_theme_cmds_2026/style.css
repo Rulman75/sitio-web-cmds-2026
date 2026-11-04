@@ -1776,3 +1776,127 @@ body.header-dark .cmds-nav-link.active {
   font-size: 0.72rem;
   color: rgba(255, 255, 255, 0.65);
 }
+
+/* ==========================================================================
+   REESTRUCTURACIÓN RED DE CENTROS DE SALUD 2026 (CESFAM, CECOSF, SAR, LAB)
+   Orden visual:
+   1° Ficha Principal (Director/a, Cartera de Servicios y Población Beneficiaria)
+   2° Horarios de Atención (CESFAM / SAPU) y Preguntas Frecuentes
+   3° Tarjetón de Contacto, Teléfonos, Correos y Formulario
+   4° Mapa de Ubicación (Google Maps) al pie
+   ========================================================================== */
+.cmds-content-card.area-salud-card .elementor-section-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 36px !important;
+}
+
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  width: 100% !important;
+}
+
+/* 1° ARRIBA: Ficha de Director(a), Servicios y Población Beneficiaria */
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) {
+  order: 1 !important;
+  background: linear-gradient(180deg, #f8fbfe 0%, #ffffff 100%);
+  border: 1px solid #dbe7f0;
+  border-radius: 18px;
+  padding: 28px 24px !important;
+  box-shadow: 0 8px 24px rgba(0, 96, 152, 0.06);
+}
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3)::before {
+  content: "🏥 Ficha Institucional del Centro · Dirección, Cartera de Servicios y Cobertura";
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cmds-blue);
+  background: var(--cmds-teal-light);
+  border-left: 4px solid var(--cmds-teal);
+  padding: 9px 14px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+}
+
+/* Mejorar presentación de Foto y Cargo de Director(a) en la columna 3 */
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) .elementor-top-column {
+  padding: 12px !important;
+}
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) .elementor-top-column:nth-of-type(3) > .elementor-element-populated {
+  margin: 0 !important;
+  padding: 16px !important;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 47, 77, 0.07);
+}
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) .elementor-inner-column:nth-of-type(2) img {
+  border-radius: 12px !important;
+  max-height: 240px !important;
+  width: auto !important;
+  object-fit: cover !important;
+  margin: 0 auto 10px !important;
+  display: block !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+}
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) .elementor-inner-column:nth-of-type(2) .elementor-widget-text-editor,
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) .elementor-inner-column:nth-of-type(2) .elementor-widget-text-editor p {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 0.96rem !important;
+  line-height: 1.35 !important;
+  text-align: center !important;
+  color: var(--cmds-blue) !important;
+  margin: 2px 0 !important;
+}
+
+/* 2° MEDIO: Horarios de Atención (CESFAM / SAPU) y Preguntas Frecuentes */
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(4) {
+  order: 2 !important;
+  padding-top: 26px !important;
+  border-top: 2px solid var(--border-color);
+}
+
+/* 3° ABAJO: Tarjetón de Contacto, Teléfonos, Correos y Formulario */
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(2) {
+  order: 3 !important;
+  padding-top: 28px !important;
+  border-top: 2px solid var(--border-color);
+}
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(2)::before {
+  content: "📍 Contacto Directo, Teléfonos y Ubicación del Centro";
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--cmds-blue);
+  background: var(--cmds-blue-light);
+  border-left: 4px solid var(--cmds-blue);
+  padding: 9px 14px;
+  border-radius: 8px;
+  margin-bottom: 22px;
+}
+
+/* 4° AL FINAL: Mapa Interactivo de Ubicación (Google Maps) */
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(1) {
+  order: 4 !important;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid #dbe7f0;
+  box-shadow: var(--shadow-md);
+}
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(1) iframe {
+  height: 380px !important;
+  width: 100% !important;
+  display: block !important;
+}
+
+/* Si existe una 5ta sección auxiliar, mantenerla al final */
+.cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(n+5) {
+  order: 5 !important;
+}

@@ -105,7 +105,7 @@ while (have_posts()) :
 
       <?php else : ?>
         <!-- CONTENEDOR INSTITUCIONAL 2026 PARA ELEMENTOR / UNYSON / CONTENIDO -->
-        <div class="cmds-content-card">
+        <div class="cmds-content-card <?php echo esc_attr($sec['area_class']); ?>-card" data-page-slug="<?php echo esc_attr($slug); ?>">
           <?php
           ob_start();
           the_content();
