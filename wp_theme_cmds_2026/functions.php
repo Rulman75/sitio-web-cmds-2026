@@ -22,10 +22,16 @@ function cmds_2026_enqueue_assets() {
         'cmds-2026-main-style',
         get_stylesheet_directory_uri() . '/style.css',
         ['cmds-2026-google-fonts'],
-        '2026.1.6'
+        '2026.1.7'
     );
 }
 add_action('wp_enqueue_scripts', 'cmds_2026_enqueue_assets', 999);
+
+/**
+ * Ocultar la barra de herramientas superior de WordPress en la vista pública del portal
+ * para que al estar conectado como administrador no desplace ni ensucie la cabecera 2026.
+ */
+add_filter('show_admin_bar', '__return_false');
 
 /**
  * Optimización de Velocidad 2026:
@@ -63,20 +69,25 @@ function cmds_2026_optimize_frontend_assets() {
         '/plugins/wpdm-gutenberg-blocks/',
         '/plugins/contact-form-7/',
         '/plugins/responsive-accordion-and-collapse/',
-        '/wp-includes/css/dashicons',
         '/wp-includes/css/dist/block-library/',
+    ];
+
+    $protected_styles = [
+        'cmds-2026-main-style',
+        'cmds-2026-google-fonts',
+        'admin-bar',
+        'dashicons',
     ];
 
     if (isset($wp_styles->registered) && is_array($wp_styles->registered)) {
         foreach ($wp_styles->registered as $handle => $style_obj) {
-            if ($handle === 'cmds-2026-main-style' || $handle === 'cmds-2026-google-fonts' || $handle === 'admin-bar') {
+            if (in_array($handle, $protected_styles, true)) {
                 continue;
             }
             $src = isset($style_obj->src) ? (string) $style_obj->src : '';
             foreach ($always_remove_css_patterns as $pat) {
                 if (strpos($src, $pat) !== false) {
                     wp_dequeue_style($handle);
-                    wp_deregister_style($handle);
                     continue 2;
                 }
             }
@@ -84,7 +95,6 @@ function cmds_2026_optimize_frontend_assets() {
                 foreach ($frontpage_remove_css_patterns as $pat) {
                     if (strpos($src, $pat) !== false) {
                         wp_dequeue_style($handle);
-                        wp_deregister_style($handle);
                         continue 2;
                     }
                 }
@@ -108,22 +118,27 @@ function cmds_2026_optimize_frontend_assets() {
         '/plugins/contact-form-7/',
         '/plugins/responsive-accordion-and-collapse/',
         '/plugins/elementor/',
-        '/wp-includes/js/jquery/',
         '/wp-includes/js/dist/',
         '/wp-includes/js/imagesloaded',
         '/wp-includes/js/masonry',
     ];
 
+    $protected_scripts = [
+        'admin-bar',
+        'jquery',
+        'jquery-core',
+        'jquery-migrate',
+    ];
+
     if (isset($wp_scripts->registered) && is_array($wp_scripts->registered)) {
         foreach ($wp_scripts->registered as $handle => $script_obj) {
-            if ($handle === 'admin-bar') {
+            if (in_array($handle, $protected_scripts, true)) {
                 continue;
             }
             $src = isset($script_obj->src) ? (string) $script_obj->src : '';
             foreach ($always_remove_js_patterns as $pat) {
                 if (strpos($src, $pat) !== false) {
                     wp_dequeue_script($handle);
-                    wp_deregister_script($handle);
                     continue 2;
                 }
             }
@@ -131,7 +146,6 @@ function cmds_2026_optimize_frontend_assets() {
                 foreach ($frontpage_remove_js_patterns as $pat) {
                     if (strpos($src, $pat) !== false) {
                         wp_dequeue_script($handle);
-                        wp_deregister_script($handle);
                         continue 2;
                     }
                 }

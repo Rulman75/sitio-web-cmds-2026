@@ -115,6 +115,7 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
     <span>Cabecera:</span>
     <button type="button" class="proto-btn active" id="btnHeaderLight" onclick="cmdsSetHeaderMode('light')">Fondo Claro</button>
     <button type="button" class="proto-btn" id="btnHeaderDark" onclick="cmdsSetHeaderMode('dark')">Fondo Azul (#006098)</button>
+    <a href="<?php echo esc_url(admin_url('admin.php?page=cmds-tv-youtube')); ?>" class="proto-btn" style="text-decoration:none;color:#fff !important;border-color:rgba(68,186,190,0.6);">⚙️ Panel CMDS TV</a>
   </div>
 
   <script>
