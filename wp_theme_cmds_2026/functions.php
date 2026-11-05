@@ -609,3 +609,65 @@ function cmds_2026_get_page_section_info($post_name) {
         'siblings'   => $corporacion,
     ];
 }
+
+/**
+ * Reemplazar completamente el Favicon antiguo (2019) por el Favicon Oficial CMDS 2026
+ * tanto en el portal público como en el Panel de Administración (wp-admin) y Login.
+ */
+function cmds_2026_override_site_icon_url($url, $size, $blog_id) {
+    $assets_uri = get_stylesheet_directory_uri() . '/assets';
+    if ($size <= 32 && $size > 0) {
+        return $assets_uri . '/favicon-32.png?v=2026.4';
+    }
+    if ($size === 180) {
+        return $assets_uri . '/favicon-180.png?v=2026.4';
+    }
+    if ($size === 192) {
+        return $assets_uri . '/favicon-192.png?v=2026.4';
+    }
+    if ($size === 270) {
+        return $assets_uri . '/favicon-270.png?v=2026.4';
+    }
+    return $assets_uri . '/favicon-isotipo.png?v=2026.4';
+}
+add_filter('get_site_icon_url', 'cmds_2026_override_site_icon_url', 999, 3);
+
+function cmds_2026_admin_and_login_favicon() {
+    $assets_uri = get_stylesheet_directory_uri() . '/assets';
+    echo '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url($assets_uri . '/favicon-32.png?v=2026.4') . '" />' . "\n";
+    echo '<link rel="shortcut icon" type="image/png" href="' . esc_url($assets_uri . '/favicon-isotipo.png?v=2026.4') . '" />' . "\n";
+}
+add_action('admin_head', 'cmds_2026_admin_and_login_favicon', 999);
+add_action('login_head', 'cmds_2026_admin_and_login_favicon', 999);
+
+/**
+ * Limpiar cualquier referencia al favicon antiguo (uploads/2019/04/favicon-1.png)
+ * inyectada por el tema padre (edugrade) o metadatos antiguos en el <head>.
+ */
+function cmds_2026_start_head_favicon_clean() {
+    ob_start(function ($buffer) {
+        $new_fav_512 = get_stylesheet_directory_uri() . '/assets/favicon-isotipo.png?v=2026.4';
+        $new_fav_32  = get_stylesheet_directory_uri() . '/assets/favicon-32.png?v=2026.4';
+        $buffer = preg_replace(
+            '#<link[^>]+href=["\'][^"\']*uploads/2019/04/favicon-1\.png["\'][^>]*>#i',
+            '<link rel="icon" href="' . esc_url($new_fav_32) . '" type="image/png" />',
+            $buffer
+        );
+        $buffer = str_replace(
+            [
+                'https://www.cmds.cl/wp-content/uploads/2019/04/favicon-1.png',
+                '//www.cmds.cl/wp-content/uploads/2019/04/favicon-1.png',
+            ],
+            $new_fav_512,
+            $buffer
+        );
+        return $buffer;
+    });
+}
+add_action('wp_head', 'cmds_2026_start_head_favicon_clean', 0);
+add_action('wp_head', function () {
+    if (ob_get_level() > 0) {
+        @ob_end_flush();
+    }
+}, 9999);
+
