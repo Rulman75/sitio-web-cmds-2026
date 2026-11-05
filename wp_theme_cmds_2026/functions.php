@@ -22,7 +22,7 @@ function cmds_2026_enqueue_assets() {
         'cmds-2026-main-style',
         get_stylesheet_directory_uri() . '/style.css',
         ['cmds-2026-google-fonts'],
-        '2026.2.1'
+        '2026.3.0'
     );
 }
 add_action('wp_enqueue_scripts', 'cmds_2026_enqueue_assets', 999);
