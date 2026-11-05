@@ -22,7 +22,7 @@ function cmds_2026_enqueue_assets() {
         'cmds-2026-main-style',
         get_stylesheet_directory_uri() . '/style.css',
         ['cmds-2026-google-fonts'],
-        '2026.1.7'
+        '2026.1.8'
     );
 }
 add_action('wp_enqueue_scripts', 'cmds_2026_enqueue_assets', 999);
@@ -221,11 +221,16 @@ function cmds_2026_parse_playlist_id($input) {
  * Limpiar caché rápida de páginas del portal 2026 al actualizar contenidos o ajustes
  */
 function cmds_2026_flush_page_cache() {
-    $cache_dir = ABSPATH . 'wp-content/cache/cmds-2026';
-    if (is_dir($cache_dir)) {
-        foreach ((array) glob($cache_dir . '/*.html') as $f) {
-            if (is_file($f)) {
-                @unlink($f);
+    $dirs = [
+        ABSPATH . 'wp-content/cache/cmds-2026',
+        ABSPATH . 'wp-content/uploads/cmds-cache-2026',
+    ];
+    foreach ($dirs as $cache_dir) {
+        if (is_dir($cache_dir)) {
+            foreach ((array) glob($cache_dir . '/*.html') as $f) {
+                if (is_file($f)) {
+                    @unlink($f);
+                }
             }
         }
     }
@@ -478,6 +483,23 @@ function cmds_2026_rewrite_staging_content_links($content) {
             $content
         );
     }
+
+    // Marcar secciones internas de títulos con flechas antiguas (fa-angle-double-right)
+    // para ocultar la columna de la flecha >> superpuesta y expandir el título al 100%
+    if (strpos($content, 'fa-angle-double-right') !== false) {
+        $content = preg_replace_callback(
+            '/<section\b([^>]*\belementor-inner-section\b[^>]*)>(.*?)<\/section>/is',
+            function ($m) {
+                if (strpos($m[2], 'fa-angle-double-right') !== false) {
+                    $attrs = preg_replace('/class=(["\'])/i', 'class=$1cmds-clean-heading-section ', $m[1], 1);
+                    return '<section' . $attrs . '>' . $m[2] . '</section>';
+                }
+                return $m[0];
+            },
+            $content
+        );
+    }
+
     return $content;
 }
 add_filter('the_content', 'cmds_2026_rewrite_staging_content_links', 99);

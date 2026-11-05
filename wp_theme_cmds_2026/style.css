@@ -1900,3 +1900,60 @@ body.header-dark .cmds-nav-link.active {
 .cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(n+5) {
   order: 5 !important;
 }
+
+/* ==========================================================================
+   CORRECCIÓN DE ENCABEZADOS INTERIORES CON FLECHAS >> (PRESIDENCIA,
+   SECRETARÍA EJECUTIVA, DIRECCIONES, SOMOS, EDUCACIÓN)
+   ========================================================================== */
+.cmds-content-card .cmds-clean-heading-section .elementor-inner-column:first-child,
+.cmds-content-card .elementor-element-ead46a3,
+.cmds-content-card .elementor-widget-icon .fa-angle-double-right {
+  display: none !important;
+}
+
+.cmds-content-card .cmds-clean-heading-section .elementor-inner-column:last-child,
+.cmds-content-card .elementor-element-5a33189 {
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
+
+.cmds-content-card .cmds-clean-heading-section .elementor-heading-title,
+.cmds-content-card .elementor-element-5a33189 .elementor-heading-title {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 2.15rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  color: var(--cmds-blue) !important;
+  border-left: 5px solid var(--cmds-teal);
+  padding: 4px 0 4px 16px !important;
+  margin: 0 0 18px 0 !important;
+  text-align: left !important;
+}
+
+/* Tarjetas de Autoridades y Directivos (Presidencia, Secretaría Ejecutiva, Direcciones) */
+.cmds-content-card .eael-team-item {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: var(--shadow-md) !important;
+  border: 1px solid #dbe7f0 !important;
+}
+.cmds-content-card .eael-team-item .eael-team-content {
+  background: linear-gradient(135deg, var(--cmds-blue) 0%, var(--cmds-blue-dark) 100%) !important;
+  border-top: 4px solid var(--cmds-teal) !important;
+  padding: 18px 20px !important;
+}
+.cmds-content-card .eael-team-item .eael-team-member-name {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 1.25rem !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  margin-bottom: 6px !important;
+}
+.cmds-content-card .eael-team-item .eael-team-member-position {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 600 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  line-height: 1.4 !important;
+}
