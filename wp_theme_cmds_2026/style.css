@@ -1993,6 +1993,8 @@ body.header-dark .cmds-nav-link.active {
 .cmds-content-card .elementor-element-ad669af .eael-team-item,
 .cmds-content-card .elementor-element-ad669af .eael-team-item-inner {
   height: 100% !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
   display: flex !important;
   flex-direction: column !important;
 }
@@ -2030,8 +2032,12 @@ body.header-dark .cmds-nav-link.active {
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
-  min-height: 112px !important;
-  padding: 16px 14px !important;
+  height: 118px !important;
+  min-height: 118px !important;
+  max-height: 118px !important;
+  padding: 14px 12px !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
 }
 
 .cmds-content-card .elementor-element-ad669af .eael-team-item .eael-team-member-name {
