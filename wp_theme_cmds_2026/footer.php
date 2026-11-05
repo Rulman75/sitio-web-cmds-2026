@@ -30,8 +30,8 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
       <div class="footer-grid">
         <div>
           <div class="footer-brand-logos">
-            <img src="<?php echo esc_url($assets_uri . '/logo-cmds-oscuro.png'); ?>" alt="CMDS Antofagasta" class="footer-logo-cmds" />
-            <img src="<?php echo esc_url($assets_uri . '/logo-muni-antofagasta.png'); ?>" alt="Ilustre Municipalidad de Antofagasta" class="footer-logo-muni" />
+            <img src="<?php echo esc_url($assets_uri . '/logo-cmds-oscuro.png?v=2026.2'); ?>" alt="CMDS Antofagasta" class="footer-logo-cmds" />
+            <img src="<?php echo esc_url($assets_uri . '/logo-muni-antofagasta.png?v=2026.2'); ?>" alt="Ilustre Municipalidad de Antofagasta" class="footer-logo-muni" />
           </div>
           <div class="footer-slogan">“Educación que transforma, salud que protege”</div>
           <p class="footer-desc">

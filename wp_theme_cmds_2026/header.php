@@ -76,12 +76,12 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
     <div class="cmds-container cmds-header-inner">
       <div class="brand-group">
         <a href="<?php echo esc_url(home_url('/')); ?>" class="brand-logo" title="CMDS Antofagasta - Inicio">
-          <img src="<?php echo esc_url($assets_uri . '/logo-cmds-color.png'); ?>" alt="CMDS Antofagasta" class="logo-light-bg" />
-          <img src="<?php echo esc_url($assets_uri . '/logo-cmds-oscuro.png'); ?>" alt="CMDS Antofagasta" class="logo-dark-bg" />
+          <img src="<?php echo esc_url($assets_uri . '/logo-cmds-color.png?v=2026.2'); ?>" alt="CMDS Antofagasta" class="logo-light-bg" />
+          <img src="<?php echo esc_url($assets_uri . '/logo-cmds-oscuro.png?v=2026.2'); ?>" alt="CMDS Antofagasta" class="logo-dark-bg" />
         </a>
         <div class="brand-divider"></div>
         <a href="https://www.municipalidadantofagasta.cl" target="_blank" rel="noopener" class="muni-badge" title="Ilustre Municipalidad de Antofagasta">
-          <img src="<?php echo esc_url($assets_uri . '/logo-muni-antofagasta.png'); ?>" alt="Ilustre Municipalidad de Antofagasta" />
+          <img src="<?php echo esc_url($assets_uri . '/logo-muni-antofagasta.png?v=2026.2'); ?>" alt="Ilustre Municipalidad de Antofagasta" />
         </a>
       </div>
 
