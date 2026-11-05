@@ -113,6 +113,31 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
     function cmdsSetFontScale(scale) {
       document.documentElement.style.setProperty('--font-scale', scale);
     }
+    function cmdsToggleMobileMenu() {
+      var isOpen = document.body.classList.toggle('mobile-menu-open');
+      var btn = document.getElementById('cmdsMobileToggle');
+      if (btn) {
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      var navTriggers = document.querySelectorAll('.cmds-nav-item > span.cmds-nav-link');
+      navTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', function(e) {
+          if (window.innerWidth <= 1080) {
+            e.preventDefault();
+            var parentItem = trigger.parentElement;
+            var wasOpen = parentItem.classList.contains('mobile-sub-open');
+            document.querySelectorAll('.cmds-nav-item.mobile-sub-open').forEach(function(item) {
+              item.classList.remove('mobile-sub-open');
+            });
+            if (!wasOpen) {
+              parentItem.classList.add('mobile-sub-open');
+            }
+          }
+        });
+      });
+    });
     try {
       document.body.classList.remove('header-dark');
       localStorage.removeItem('cmds_header_mode');

@@ -2213,3 +2213,396 @@ html {
   background: #ffffff;
   color: var(--cmds-blue-deeper) !important;
 }
+
+/* ==========================================================================
+   SISTEMA RESPONSIVO INTEGRAL 2026 (TABLETS, CELULARES Y PANTALLAS PEQUEÑAS)
+   ========================================================================== */
+
+/* Botón Menú Hamburguesa (oculto en Escritorio > 1080px) */
+.cmds-mobile-toggle {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: var(--cmds-blue-light);
+  color: var(--cmds-blue);
+  border: 1.5px solid rgba(0, 96, 152, 0.25);
+  padding: 9px 14px;
+  border-radius: 10px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cmds-mobile-toggle:hover,
+body.mobile-menu-open .cmds-mobile-toggle {
+  background: var(--cmds-blue);
+  color: #ffffff;
+  border-color: var(--cmds-blue);
+}
+.hamburger-box {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 18px;
+  height: 14px;
+}
+.hamburger-line {
+  display: block;
+  width: 100%;
+  height: 2.2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+body.mobile-menu-open .hamburger-line:nth-child(1) {
+  transform: translateY(5.9px) rotate(45deg);
+}
+body.mobile-menu-open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+body.mobile-menu-open .hamburger-line:nth-child(3) {
+  transform: translateY(-5.9px) rotate(-45deg);
+}
+
+/* Evitar cualquier desborde horizontal en móviles */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 1. TABLETS HORIZONTALES Y PANTALLAS MEDIANAS (<= 1120px) */
+@media (max-width: 1120px) {
+  .hero-grid,
+  .pillars-grid,
+  .cmds-tv-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .services-grid,
+  .news-grid,
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cmds-tv-playlist-card {
+    max-height: 420px;
+  }
+  /* Directorio: 3 columnas en tablet */
+  .cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* 2. TABLETS VERTICALES Y NAVEGACIÓN TÁCTIL (<= 1080px) */
+@media (max-width: 1080px) {
+  .cmds-header-inner {
+    min-height: 86px;
+    padding: 8px 0;
+    position: relative;
+  }
+  .brand-logo img {
+    height: 66px;
+  }
+  .brand-divider {
+    height: 50px;
+  }
+  .muni-badge img {
+    height: 56px;
+  }
+  .cmds-mobile-toggle {
+    display: inline-flex;
+  }
+
+  /* Menú Desplegable Móvil / Tablet (Acordeón Táctil) */
+  .cmds-main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    right: -20px;
+    background: #ffffff;
+    border-top: 3px solid var(--cmds-teal);
+    border-bottom: 4px solid var(--cmds-blue);
+    box-shadow: 0 20px 40px rgba(0, 35, 65, 0.22);
+    padding: 16px 20px 24px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+    z-index: 1500;
+  }
+  body.mobile-menu-open .cmds-main-nav {
+    display: flex;
+  }
+  .cmds-nav-item {
+    width: 100%;
+    border-bottom: 1px solid #edf2f7;
+  }
+  .cmds-nav-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 13px 14px;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .cmds-dropdown-menu,
+  .cmds-dropdown-menu.mega-salud,
+  .cmds-dropdown-menu.mega-educacion {
+    position: static;
+    min-width: 100%;
+    width: 100%;
+    display: none;
+    grid-template-columns: 1fr;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: #f4f8fb;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+  }
+  .cmds-nav-item.mobile-sub-open > .cmds-dropdown-menu {
+    display: grid;
+    gap: 10px;
+  }
+  .cmds-nav-item.mobile-sub-open > .cmds-nav-link {
+    background: var(--cmds-blue-light);
+    color: var(--cmds-blue) !important;
+  }
+  .cmds-nav-item.mobile-sub-open > .cmds-nav-link svg {
+    transform: rotate(180deg);
+  }
+  .cmds-dropdown-link {
+    padding: 9px 10px;
+    font-size: 0.92rem;
+  }
+}
+
+/* 3. CELULARES Y PANTALLAS MÓVILES (<= 768px) */
+@media (max-width: 768px) {
+  .cmds-container {
+    padding: 0 14px;
+  }
+
+  /* Barra Superior Compacta en Móvil */
+  .cmds-topbar {
+    padding: 6px 0;
+  }
+  .cmds-topbar-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .slogan-pill,
+  .topbar-contact span:first-child {
+    display: none;
+  }
+  .cmds-topbar-left {
+    width: 100%;
+    justify-content: center;
+    gap: 8px;
+  }
+  .topbar-socials {
+    border-left: none;
+    padding-left: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .cmds-topbar-right {
+    width: 100%;
+    justify-content: center;
+  }
+  .gov-links {
+    justify-content: center;
+    gap: 4px;
+  }
+  .gov-link {
+    font-size: 0.72rem;
+    padding: 3px 7px;
+  }
+  .a11y-controls {
+    display: none;
+  }
+
+  /* Cabecera y Logos en Celular */
+  .cmds-header-inner {
+    min-height: 72px;
+    gap: 8px;
+  }
+  .brand-group {
+    gap: 10px;
+  }
+  .brand-logo img {
+    height: 52px;
+  }
+  .brand-divider {
+    height: 38px;
+  }
+  .muni-badge img {
+    height: 44px;
+  }
+  .btn-hora-salud {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+  .btn-hora-salud .btn-hora-text {
+    display: none;
+  }
+  .btn-hora-salud::after {
+    content: "Hora Salud";
+  }
+
+  /* Portada: Hero, Tarjetas, Banner YouTube, Pilares y Noticias */
+  .hero-section {
+    padding: 20px 0 30px;
+  }
+  .hero-slider-card,
+  .hero-slide.active {
+    min-height: 340px;
+  }
+  .hero-slide-content {
+    padding: 20px 18px;
+  }
+  .hero-slide-title {
+    font-size: 1.25rem;
+  }
+  .hero-slide-desc {
+    font-size: 0.85rem;
+  }
+  .hero-youtube-Spotlight {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-yt-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .services-grid,
+  .news-grid,
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .pillar-banner,
+  .pillar-body {
+    padding: 20px 18px;
+  }
+  .pillar-stats {
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  /* Sección CMDS TV en Celular */
+  .cmds-tv-section {
+    padding: 36px 0 44px;
+  }
+  .cmds-tv-title {
+    font-size: 1.45rem;
+  }
+  .cmds-tv-nowplaying-bar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .cmds-tv-controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cmds-tv-ctrl-btn {
+    flex: 1;
+    text-align: center;
+  }
+
+  /* Páginas Interiores (CESFAM, Presidencia, Secretaría, Directorio, Educación) */
+  .cmds-interior-hero {
+    padding: 28px 0 24px;
+  }
+  .cmds-interior-title {
+    font-size: 1.55rem;
+  }
+  .cmds-subnav-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cmds-subnav-pill {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .cmds-interior-main {
+    padding: 24px 0 40px;
+  }
+  .cmds-content-card {
+    padding: 22px 16px;
+  }
+  .cmds-content-card .cmds-clean-heading-section .elementor-heading-title,
+  .cmds-content-card .elementor-element-5a33189 .elementor-heading-title {
+    font-size: 1.45rem !important;
+  }
+  .cmds-content-card table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Directorio en Celular: 2 columnas en phablets, 1 en teléfonos */
+  .cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+  .cmds-content-card .elementor-element-ad669af .eael-team-item .eael-team-content {
+    height: auto !important;
+    min-height: 112px !important;
+    max-height: none !important;
+  }
+
+  /* Red de Centros de Salud (CESFAM / CECOSF / SAR) en Celular */
+  .cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(3) {
+    padding: 18px 14px !important;
+  }
+  .cmds-content-card.area-salud-card .elementor-section-wrap > section.elementor-top-section:nth-of-type(1) iframe {
+    height: 260px !important;
+  }
+
+  /* Pie de página en Celular */
+  .campaign-box {
+    padding: 22px 18px;
+  }
+  .footer-logo-cmds {
+    height: 70px;
+  }
+  .footer-logo-muni {
+    height: 56px;
+  }
+}
+
+/* 4. TELÉFONOS COMPACTOS (<= 520px) */
+@media (max-width: 520px) {
+  .brand-logo img {
+    height: 44px;
+  }
+  .brand-divider {
+    height: 32px;
+  }
+  .muni-badge img {
+    height: 38px;
+  }
+  .mobile-toggle-label {
+    display: none;
+  }
+  .cmds-mobile-toggle {
+    padding: 9px 11px;
+  }
+  /* Directorio: 1 tarjeta por fila en celulares verticales */
+  .cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row {
+    grid-template-columns: 1fr !important;
+  }
+  .cmds-content-card .elementor-element-ad669af .eael-team-image,
+  .cmds-content-card .elementor-element-ad669af .eael-team-image figure,
+  .cmds-content-card .elementor-element-ad669af .eael-team-image figure img {
+    height: 300px !important;
+  }
+}

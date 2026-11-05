@@ -198,8 +198,16 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
 
       <div class="header-actions">
         <a href="https://horasalud.cl/web/portal/" target="_blank" rel="noopener" class="btn-hora-salud">
-          🩺 Hora Salud en Línea
+          🩺 <span class="btn-hora-text">Hora Salud en Línea</span>
         </a>
+        <button type="button" class="cmds-mobile-toggle" id="cmdsMobileToggle" onclick="cmdsToggleMobileMenu()" aria-label="Abrir menú principal" aria-expanded="false">
+          <span class="hamburger-box">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </span>
+          <span class="mobile-toggle-label">Menú</span>
+        </button>
       </div>
     </div>
   </header>
