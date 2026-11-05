@@ -22,7 +22,7 @@ function cmds_2026_enqueue_assets() {
         'cmds-2026-main-style',
         get_stylesheet_directory_uri() . '/style.css',
         ['cmds-2026-google-fonts'],
-        '2026.1.9'
+        '2026.2.0'
     );
 }
 add_action('wp_enqueue_scripts', 'cmds_2026_enqueue_assets', 999);
@@ -498,6 +498,18 @@ function cmds_2026_rewrite_staging_content_links($content) {
             },
             $content
         );
+    }
+
+    // Normalizar nombres y cargos en las tarjetas del Directorio para presentación uniforme
+    if (strpos($content, 'eael-team-member') !== false) {
+        $replacements = [
+            'Sra. patricia lorca' => 'Sra. Patricia Lorca',
+            'SrA. PAMELA PÉREZ'   => 'Sra. Pamela Pérez',
+            'Sr. JOSÉ ANTONIO GONZÁLEZ' => 'Sr. José Antonio González',
+            'Sr. JOSÉ ANTONIO DÍAZ'     => 'Sr. José Antonio Díaz',
+            'PRESIDENTE DEL DIRECTORIO Y Alcalde de Antofagasta' => 'Presidente del Directorio y Alcalde',
+        ];
+        $content = strtr($content, $replacements);
     }
 
     return $content;

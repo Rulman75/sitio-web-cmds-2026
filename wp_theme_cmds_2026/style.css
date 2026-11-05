@@ -1957,4 +1957,253 @@ body.header-dark .cmds-nav-link.active {
   font-weight: 600 !important;
   color: rgba(255, 255, 255, 0.9) !important;
   line-height: 1.4 !important;
+  text-transform: uppercase !important;
+}
+
+/* ==========================================================================
+   PÁGINA DIRECTORIO (/directorio/): 5 INTEGRANTES 100% UNIFORMES EN TAMAÑO
+   ========================================================================== */
+/* Ocultar la 6ta columna vacía heredada de Elementor en la fila del Directorio */
+.cmds-content-card[data-page-slug="directorio"] .elementor-element-71777da,
+.cmds-content-card .elementor-element-ad669af .elementor-column:nth-child(6) {
+  display: none !important;
+}
+
+/* Distribuir los 5 directores en una grilla exacta de 5 columnas iguales */
+.cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 20px !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+.cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row > .elementor-column {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: none !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.cmds-content-card .elementor-element-ad669af .elementor-column-wrap,
+.cmds-content-card .elementor-element-ad669af .elementor-widget-wrap,
+.cmds-content-card .elementor-element-ad669af .elementor-widget-eael-team-member,
+.cmds-content-card .elementor-element-ad669af .elementor-widget-container,
+.cmds-content-card .elementor-element-ad669af .eael-team-item,
+.cmds-content-card .elementor-element-ad669af .eael-team-item-inner {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Ocultar inner-section vacía dentro de la 5ta columna que desalineaba la tarjeta */
+.cmds-content-card .elementor-element-ad669af .elementor-inner-section {
+  display: none !important;
+}
+
+/* Igualar el alto y recorte de las 5 fotografías del Directorio */
+.cmds-content-card .elementor-element-ad669af .eael-team-image,
+.cmds-content-card .elementor-element-ad669af .eael-team-image figure {
+  width: 100% !important;
+  height: 280px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  background: #e6eef5 !important;
+  flex-shrink: 0 !important;
+}
+
+.cmds-content-card .elementor-element-ad669af .eael-team-image figure img {
+  width: 100% !important;
+  height: 280px !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+  display: block !important;
+}
+
+/* Igualar la caja inferior azul con nombre y cargo en las 5 tarjetas */
+.cmds-content-card .elementor-element-ad669af .eael-team-item .eael-team-content {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  min-height: 112px !important;
+  padding: 16px 14px !important;
+}
+
+.cmds-content-card .elementor-element-ad669af .eael-team-item .eael-team-member-name {
+  font-size: 1.05rem !important;
+  line-height: 1.28 !important;
+  margin: 0 0 6px 0 !important;
+}
+
+.cmds-content-card .elementor-element-ad669af .eael-team-item .eael-team-member-position {
+  font-size: 0.76rem !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 1120px) {
+  .cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+@media (max-width: 720px) {
+  .cmds-content-card .elementor-element-ad669af > .elementor-container > .elementor-row {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ==========================================================================
+   ICONOS REDES SOCIALES EN TOPBAR + INVITACIÓN DESTACADA A CMDS TV (YOUTUBE)
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+.topbar-socials {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.topbar-social-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.13);
+  color: #ffffff !important;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.topbar-social-icon:hover {
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+.topbar-social-icon.ig:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border-color: transparent;
+}
+.topbar-social-icon.fb:hover {
+  background: #1877f2;
+  border-color: #1877f2;
+}
+.topbar-social-icon.yt:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+}
+
+/* Píldora Destacada en Topbar que invita a ver CMDS TV (YouTube) */
+.topbar-tv-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 4px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--cmds-pink) 0%, var(--cmds-amber) 100%);
+  color: #ffffff !important;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  box-shadow: 0 3px 12px rgba(235, 86, 126, 0.4);
+  transition: all 0.2s ease;
+}
+.topbar-tv-cta:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 5px 16px rgba(247, 165, 22, 0.55);
+  color: #ffffff !important;
+}
+.topbar-tv-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.38);
+  display: inline-block;
+}
+
+/* Banner Destacado en Hero de Portada invitando al Canal de YouTube (CMDS TV) */
+.hero-youtube-Spotlight {
+  margin-top: 22px;
+  padding: 16px 24px;
+  border-radius: 16px;
+  background: linear-gradient(95deg, #002b47 0%, var(--cmds-blue) 55%, #0b739c 100%);
+  border: 2px solid rgba(68, 186, 190, 0.55);
+  box-shadow: 0 10px 28px rgba(0, 47, 77, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  transition: all 0.22s ease;
+}
+.hero-youtube-Spotlight:hover {
+  transform: translateY(-2px);
+  border-color: var(--cmds-amber);
+  box-shadow: 0 14px 34px rgba(0, 47, 77, 0.24);
+}
+.hero-yt-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.hero-yt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: var(--cmds-pink);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(235, 86, 126, 0.45);
+}
+.hero-yt-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hero-yt-text strong {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+.hero-yt-text span {
+  font-size: 0.86rem;
+  color: rgba(255, 255, 255, 0.88);
+}
+.hero-yt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 99px;
+  background: var(--cmds-amber);
+  color: #1f1300 !important;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+  box-shadow: 0 4px 14px rgba(247, 165, 22, 0.35);
+  white-space: nowrap;
+}
+.hero-youtube-Spotlight:hover .hero-yt-btn {
+  background: #ffffff;
+  color: var(--cmds-blue-deeper) !important;
 }

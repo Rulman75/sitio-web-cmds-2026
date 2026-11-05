@@ -137,6 +137,23 @@ if ($recent_query->have_posts()) {
       </div>
 
     </div>
+
+    <!-- BANNER DESTACADO DE INVITACIÓN A CMDS TV (CANAL OFICIAL YOUTUBE) -->
+    <div class="cmds-container">
+      <a href="#cmds-tv" class="hero-youtube-Spotlight">
+        <div class="hero-yt-left">
+          <span class="hero-yt-badge">
+            <span class="topbar-tv-pulse"></span>
+            ▶ CMDS TV EN VIVO
+          </span>
+          <div class="hero-yt-text">
+            <strong>¿Ya visitaste nuestro Canal Oficial de YouTube?</strong>
+            <span>Mira aquí los videos más recientes de nuestras escuelas, liceos y centros de salud en reproducción continua.</span>
+          </div>
+        </div>
+        <span class="hero-yt-btn">📺 Ver transmisión abajo ↓</span>
+      </a>
+    </div>
   </section>
 
   <!-- HUB INTERACTIVO DE PORTALES Y SERVICIOS -->
