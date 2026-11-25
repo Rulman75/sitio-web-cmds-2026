@@ -79,7 +79,7 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
               <span class="footer-contact-icon">📞</span>
               <div>
                 <strong>Mesa Central:</strong><br />
-                +56 55 255 3700 / 55 2 553707
+                +56 55 255 3700
               </div>
             </li>
             <li>

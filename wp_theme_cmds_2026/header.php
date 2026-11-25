@@ -43,7 +43,7 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
         </span>
         <div class="topbar-contact">
           <span>📍 Avda. Argentina 1595, 2° Piso, Antofagasta</span>
-          <span>📞 +56 55 255 3700 / 55 2 553707</span>
+          <span>📞 +56 55 255 3700</span>
         </div>
         <div class="topbar-socials" aria-label="Redes Sociales Oficiales CMDS">
           <a href="https://www.instagram.com/cmds_antof/" target="_blank" rel="noopener" class="topbar-social-icon ig" title="Síguenos en Instagram (@cmds_antof)">
