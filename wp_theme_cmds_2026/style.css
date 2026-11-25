@@ -178,6 +178,14 @@ body.cmds-2026-body a {
   background: var(--cmds-amber) !important;
   color: #00263e !important;
 }
+.gov-link.highlight-onedrive {
+  background: rgba(68, 186, 190, 0.22);
+  border: 1px solid rgba(68, 186, 190, 0.5);
+}
+.gov-link.highlight-onedrive:hover {
+  background: var(--cmds-teal) !important;
+  color: #00263e !important;
+}
 .a11y-controls {
   display: inline-flex;
   align-items: center;

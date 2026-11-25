@@ -76,6 +76,9 @@ $assets_uri = get_stylesheet_directory_uri() . '/assets';
           <a href="https://outlook.office.com/" target="_blank" rel="noopener" class="gov-link highlight-mail">
             ✉️ Mail Corporativo
           </a>
+          <a href="https://cmdseducacion-my.sharepoint.com/" target="_blank" rel="noopener" class="gov-link highlight-onedrive" title="Acceso a OneDrive Corporativo CMDS">
+            ☁️ OneDrive
+          </a>
           <a href="https://totem.cmds.cl/totem-admin/public/login" target="_blank" rel="noopener" class="gov-link">
             👤 Portal Trabajador
           </a>
